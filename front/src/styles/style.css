@@ -1,4 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+/*
+font-family: 'Oswald', sans-serif;
+font-family: 'Montserrat', sans-serif;
+h1 - 90px
+h2 - 30px
+h2 - 48px (footer)
+h3 - 21px
+p - 21px (main)
+p - 18px
+p - 16px (footer)
+*/
+
+:root {
+    --clr-light: #F1F1F1;
+    --clr-dark: #2E323F;
+    --clr-primary: #a2a7b8;
+    --clr-secondary: #8ea8ff;
+    --clr-accent: #A59678;
+
+    --foreground: var(--clr-dark);
+    --background: var(--clr-light);
+
+    --theme-icon: "☀";
+
+    --font-title: 'Oswald', sans-serif;
+    --font-text: 'Montserrat', sans-serif;
+
+    --padding-block-section: 1rem;
+    --margin-top-element: 1em;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+ul,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
 body {
-    font-size: 2rem;
-    background-color: rgb(255, 17, 0);
+    font-family: var(--font-text);
+    line-height: 1.5;
+}
+body.theme-dark {
+    --clr-light: #F1F1F1;
+    --clr-dark: #2E323F;
+    --clr-primary: #6F737F;
+    --clr-secondary: #3B4050;
+    --clr-accent: #A59678;
+
+    --foreground: var(--clr-light);
+    --background: var(--clr-dark);
+
+    --theme-icon: "🌛︎";
+}
+
+@media (prefers-color-scheme: dark) {
+    body.theme-auto {
+        --clr-light: #F1F1F1;
+        --clr-dark: #2E323F;
+        --clr-primary: #6F737F;
+        --clr-secondary: #3B4050;
+        --clr-accent: #A59678;
+
+        --foreground: var(--clr-light);
+        --background: var(--clr-dark);
+
+        --theme-icon: "🌛︎";
+    }
+}
+
+.container {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.link--button {
+    cursor: pointer;
+    border: none;
+    background-color: var(--clr-accent);
+    color: var(--foreground);
+    padding: 0.2em 1.5em;
+    border-radius: 8rem;
+    font-family: var(--font-title);
+    font-size: inherit;
+}
+.link--button:hover,
+.link--button:focus {
+    opacity: 0.75;
+}
+
+/*
+header
+*/
+header {
+    background-color: var(--background);
+    padding: 1em 0;
+    font-family: var(--font-title);
+    text-align: center;
+}
+
+.nav-toggle {
+    position: absolute;
+    left: 1em;
+    top: 1em;
+
+    cursor: pointer;
+    border: 0;
+    width: 3em;
+    height: 3em;
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    transition: opacity 250ms ease;
+}
+
+.hamburger {
+    width: 50%;
+    height: 3px;
+    display: block;
+    margin: 3px auto;
+    background-color: var(--foreground);
+}
+
+
+.logo {
+    margin: 0 auto;
+}
+
+
+.select-theme {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--foreground);
+    font-weight: 500;
+    font-family: var(--font-family);
+}
+.select-theme option {
+    color: var(--foreground);
+    background-color: var(--background);
+}
+.theme-icon::after {
+    content: var(--theme-icon);
+    color: var(--foreground)
+}
+
+.nav {
+    display: none;
+}
+.nav--visible {
+    display: block;
+}
+
+.nav__list {
+    list-style: none;
+    margin: 1em 0;
+}
+.nav__item {
+    margin-top: 0.5em;
+}
+.nav__link {
+    text-decoration: none;
+    color: var(--foreground);
+}
+.nav__link:hover,
+.nav__link:focus {
+    opacity: 0.75;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 700pX) {
+    :root {
+        --padding-block-section: 5rem;
+    }
+
+    .logo {
+        margin: 0;
+    }
+    .nav {
+        display: block;
+    }
+    .nav__list {
+        margin: 0;
+    }
+    .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1em;
+    }
+    .main__side-bar > * + * {
+        margin: 0;
+    }
+    
+    
+    .section--two__content + .section--two__content {
+        margin: 0;
+    }
+
+    .nav-toggle {
+        display: none;
+    }
+}
+
+@media (min-width: 1000px) {
+    :root {
+        --padding-block-section: 8rem;
+    }
+    .row-large {
+        display: flex;
+        justify-content: space-between;
+        gap: 2em;
+    }
+    .col-large {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 2em;
+    }
+    .flex-end {
+        align-items: flex-end;
+    }
+
+    .section--two__content {
+        text-align: center;
+    }
+
+    .footer {
+        padding-top: 3rem;
+    }
+    .footer__title {
+        text-align: center;
+        padding-bottom: 2rem;
+    }
+
+    .footer__about {
+        width: 40%;
+    }
+    .list__container {
+        margin: 0;
+    }
 }
