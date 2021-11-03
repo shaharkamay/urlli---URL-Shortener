@@ -2,7 +2,7 @@ export { starter };
 import { applyTheme } from './event-handlers';
 
 const starter = () => {
-    // dark theme
+    // dark/light theme
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem("theme") || "auto";
         
@@ -17,4 +17,12 @@ const starter = () => {
             applyTheme(this.value);
         });
     });
+
+    //hamburger menu
+    const hamburger = document.querySelector(".nav-toggle");
+    const nav = document.querySelector(".nav");
+
+    hamburger.addEventListener("click", () => {
+        nav.classList.toggle("nav--visible");
+    })
 };

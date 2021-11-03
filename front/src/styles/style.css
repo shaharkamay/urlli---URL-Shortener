@@ -24,6 +24,8 @@ p - 16px (footer)
 
     --theme-icon: "☀";
 
+    --inverted: none;
+
     --font-title: 'Oswald', sans-serif;
     --font-text: 'Montserrat', sans-serif;
 
@@ -66,6 +68,8 @@ body.theme-dark {
     --background: var(--clr-dark);
 
     --theme-icon: "🌛︎";
+
+    --inverted: invert(1) hue-rotate(180deg);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -80,6 +84,8 @@ body.theme-dark {
         --background: var(--clr-dark);
 
         --theme-icon: "🌛︎";
+
+        --inverted: invert(1) hue-rotate(180deg);
     }
 }
 
@@ -114,11 +120,11 @@ header {
     text-align: center;
 }
 
+.mobile-nav {
+    width: 40%;
+    text-align: left;
+}
 .nav-toggle {
-    position: absolute;
-    left: 1em;
-    top: 1em;
-
     cursor: pointer;
     border: 0;
     width: 3em;
@@ -126,7 +132,6 @@ header {
     padding: 0;
     border-radius: 50%;
     background-color: var(--clr-primary);
-    color: var(--clr-light);
     transition: opacity 250ms ease;
 }
 
@@ -140,9 +145,20 @@ header {
 
 
 .logo {
+    width: 20%;
     margin: 0 auto;
 }
+.logo-img {
+    filter: var(--inverted);
+    vertical-align: bottom;
+    height: 2.5em;
+    aspect-ratio: 1 / 1;
+}
 
+.theme {
+    width: 40%;
+    text-align: right;
+}
 
 .select-theme {
     background: none;
@@ -156,6 +172,7 @@ header {
     color: var(--foreground);
     background-color: var(--background);
 }
+
 .theme-icon::after {
     content: var(--theme-icon);
     color: var(--foreground)
@@ -166,14 +183,14 @@ header {
 }
 .nav--visible {
     display: block;
+    margin-top: var(--margin-top-element);
 }
 
 .nav__list {
     list-style: none;
-    margin: 1em 0;
 }
 .nav__item {
-    margin-top: 0.5em;
+    /* margin-top: 0.5em; */
 }
 .nav__link {
     text-decoration: none;
@@ -184,7 +201,12 @@ header {
     opacity: 0.75;
 }
 
-
+.logo-and-theme {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+}
 
 
 
@@ -204,7 +226,13 @@ header {
     :root {
         --padding-block-section: 5rem;
     }
-
+    .logo-and-theme {
+        width: 30%;
+        justify-content: left;
+    }
+    .theme {
+        text-align: left;
+    }
     .logo {
         margin: 0;
     }
@@ -229,7 +257,7 @@ header {
         margin: 0;
     }
 
-    .nav-toggle {
+    .mobile-nav {
         display: none;
     }
 }
