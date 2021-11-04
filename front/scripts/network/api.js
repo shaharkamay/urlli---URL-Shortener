@@ -1,14 +1,10 @@
-export { shortenUrl };
+export { shortenUrl, addUser, loginUser };
 // import axios from 'axios';
 
 const baseURL = 'http://localhost:3000/';
 
-async function getData(url, username) {
-    const response = await axios.get(url, {
-        headers: {
-            username,
-        }
-    });
+async function getData(url, headers) {
+    const response = await axios.get(url, headers);
 
     // if(response.data.status >= 400) {
     //     displayMessage(response.data.message);
@@ -17,8 +13,8 @@ async function getData(url, username) {
     return response.data;
 }
 
-async function postData(url, originUrl, username = null) {
-    const response = await axios.post(url, { url: originUrl, username });
+async function postData(url, headers) {
+    const response = await axios.post(url, headers);
     // if(response.data.status >= 400) {
     //     displayMessage(response.data.message);
     // }
@@ -27,6 +23,20 @@ async function postData(url, originUrl, username = null) {
 }
 
 async function shortenUrl(originUrl, username) {
-    const shortUrl = await postData(`${baseURL}api/shorten`, originUrl);
+    const shortUrl = await postData(`${baseURL}api/shorten`, { url: originUrl });
     return shortUrl;
+}
+
+async function addUser(user) {
+    await postData(`${baseURL}user/sign-up`, user);
+}
+
+async function loginUser(email, password) {
+    const userName = await getData(`${baseURL}user/log-in`, {
+        headers: {
+            email,
+            password
+        }
+    });
+    return userName;
 }

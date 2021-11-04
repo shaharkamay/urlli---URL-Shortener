@@ -1,4 +1,4 @@
-export { addNewUrl, getUrlByShortUrl, getShortUrlByUrl, isShortUrlExists };
+export { addNewUrl, getUrlByShortUrl, getShortUrlByUrl, isShortUrlExists, addUser, loginUser };
 // import request from 'request';
 import { domain } from './constants.js';
 import fs from 'fs';
@@ -6,7 +6,7 @@ import fs from 'fs';
 
 function addNewUrl(shortUrl, url) {
     try {
-        const databaseObj = getDbObject();
+        const databaseObj = getDbObject('urls');
         const urls = databaseObj.urls;
         urls.push({ shortUrl, url });
         fs.writeFileSync("./src/static-files/database/urls.json", JSON.stringify(databaseObj));
@@ -15,9 +15,9 @@ function addNewUrl(shortUrl, url) {
     }
 }
 
-function getDbObject() {
+function getDbObject(dbName) {
     try {
-        const data = fs.readFileSync("./src/static-files/database/urls.json");
+        const data = fs.readFileSync(`./src/static-files/database/${dbName}.json`);
         if(!data) return null;
         return JSON.parse(data);
     } catch (error) {
@@ -26,22 +26,45 @@ function getDbObject() {
 }
 
 function getUrlByShortUrl(shortUrl) {
-    const databaseObj = getDbObject();
+    const databaseObj = getDbObject('urls');
     const urlObj = databaseObj.urls.find(urlObj => urlObj.shortUrl === shortUrl);
     if(urlObj) return urlObj.url;
     return null;
 }
 
 function getShortUrlByUrl(url) {
-    const databaseObj = getDbObject();
+    const databaseObj = getDbObject('urls');
     const urlObj = databaseObj.urls.find(urlObj => urlObj.url === url);
     if(urlObj) return urlObj.shortUrl;
     return null
 }
 
 function isShortUrlExists(shortUrl) {
-    const databaseObj = getDbObject();
+    const databaseObj = getDbObject('urls');
     return databaseObj.urls.find(urlObj => urlObj.shortUrl === shortUrl) !== undefined;
+}
+
+function isUserExists(email) {
+    const databaseObj = getDbObject('users');
+    return databaseObj.users.find(userObj => userObj.email === email) !== undefined;
+}
+
+function addUser(user) {
+    try {
+        const databaseObj = getDbObject('users');
+        const users = databaseObj.users;
+        users.push({ name: user.name, email: user.email, password: user.password });
+        fs.writeFileSync("./src/static-files/database/users.json", JSON.stringify(databaseObj));
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function loginUser(email, password) {
+    const databaseObj = getDbObject('users');
+    const user = databaseObj.users.find(userObj => userObj.email === email);
+    if(user && user.password === password) return user.name;
+    return null;
 }
 
 // class Database {

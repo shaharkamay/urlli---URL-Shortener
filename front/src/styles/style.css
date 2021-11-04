@@ -227,6 +227,17 @@ header {
     gap: 1em;
 }
 
+/* 
+hello section
+*/
+.hello {
+    background-color: var(--clr-accent);
+}
+.hello-user {
+    color: var(--foreground);
+    font-family: var(--font-text);
+}
+
 /*
 intro section
 */
@@ -281,6 +292,7 @@ main {
     height: 4em;
     border: none;
     font-size: inherit;
+    border: 1px solid var(--clr-primary);
     border-radius: var(--radius);
 }
 
@@ -363,7 +375,7 @@ footer {
     max-width: 400px;
     padding: 1em 2em;
     background-color: var(--background);
-    box-shadow: 2px 2px 20px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 2px 2px 400px 300px rgba(0, 0, 0, 0.4);
     border-radius: var(--radius);
 }
 .popup .close-btn {
@@ -390,6 +402,7 @@ footer {
 .popup .form .form-element label {
     color: var(--foreground);
 }
+.popup .form .form-element input[type="text"],
 .popup .form .form-element input[type="email"],
 .popup .form .form-element input[type="password"] {
     margin-top: 0.3em;
@@ -401,6 +414,10 @@ footer {
 }
 .popup .form .form-element button {
     width: 100%;
+}
+.popup .invalid-message {
+    color: red;
+    font-size: 0.8rem;
 }
 
 

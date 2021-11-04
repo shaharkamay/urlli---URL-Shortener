@@ -1,8 +1,16 @@
 export { starter };
 import { applyTheme } from './event-handlers';
-import { shortenUrl } from '../network/api.js';
+import { shortenUrl, addUser, loginUser } from '../network/api.js';
 
 const starter = async () => {
+    const name = localStorage.getItem('name');
+    if(name) {
+        document.querySelector('.hello-user').textContent = `Hello ${name}`;
+        document.getElementById('sign-up-link').classList.add('display-none');
+        document.querySelector('.intro').classList.add('display-none');
+
+    }
+
     // dark/light theme
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem("theme") || "auto";
@@ -61,6 +69,63 @@ const starter = async () => {
     document.getElementById('sign-up-link').addEventListener('click', () => {
         closePopups();
         document.getElementById('sign-up-form').classList.remove('display-none');
+    })
+    document.getElementById('get-started-button').addEventListener('click', () => {
+        closePopups();
+        document.getElementById('sign-up-form').classList.remove('display-none');
+    })
+
+
+    document.getElementById('sign-up-button').addEventListener('click', () => {
+        const name = document.getElementById('sign-up-name').value;
+        let isName = true;
+        name.split(' ').forEach(word => {
+            if(!validator.isAlpha(word)) {
+                isName = false;
+                return;
+            }
+        });
+        if(!isName) {
+            document.getElementById('sign-up-invalid-message').textContent = "invalid name";
+            return;
+        }
+        const email = document.getElementById('sign-up-email').value;
+        const isEmail = validator.isEmail(email);
+        if(!isEmail) {
+            document.getElementById('sign-up-invalid-message').textContent = "invalid email";
+            return;
+        }
+        const password = document.getElementById('sign-up-password').value;
+        const isPassword = validator.isEmpty(password);
+        if(isPassword) {
+            document.getElementById('sign-up-invalid-message').textContent = "invalid password";
+            return;
+        }
+
+        addUser({ name, email, password });
+        closePopups();
+    })
+
+    document.getElementById('log-in-button').addEventListener('click', async () => {
+        const email = document.getElementById('log-in-email').value;
+        const isEmail = validator.isEmail(email);
+        if(!isEmail) {
+            document.getElementById('log-in-invalid-message').textContent = "invalid email";
+            return;
+        }
+        const password = document.getElementById('log-in-password').value;
+        const isPassword = validator.isEmpty(password);
+        if(isPassword) {
+            document.getElementById('log-in-invalid-message').textContent = "invalid password";
+            return;
+        }
+
+        const userName = await loginUser(email, password);
+        if(userName) {
+            localStorage.setItem('name', userName);
+            window.location.reload();
+        }
+        closePopups();
     })
 };
 

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./images/url-logo.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
     <title>URL Shortener</title>
 <script defer src="./index.js"></script></head>
 <body>
@@ -47,13 +48,19 @@
             </nav>
         </div>
     </header>
+    
+    <section class="hello">
+        <div class="container">
+            <span class="hello-user">Hello guest</span>
+        </div>
+    </section>
 
     <section class="intro">
         <div class="container row-large flex-end">
             <h1 class="intro__title">Short links, big results</h1>
             <div class="intro__cta">
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur quia quam at est facilis mollitia ipsum modi aut sunt incidunt.</p>
-                <button class="intro__button link--button">Get Started</button>
+                <button id="get-started-button" class="intro__button link--button">Get Started</button>
             </div>
         </div>
     </section>
@@ -89,16 +96,17 @@
             <h2>Log In</h2>
             <div class="form-element">
                 <label for="email">Email</label>
-                <input type="email" placeholder="Enter email" id="email">
+                <input type="email" placeholder="Enter email" id="log-in-email">
             </div>
             <div class="form-element">
                 <label for="password">Password</label>
-                <input type="password" name="" id="password" placeholder="Enter password">
+                <input type="password" name="" id="log-in-password" placeholder="Enter password">
             </div>
             <div class="form-element">
                 <button id="log-in-button" class="link--button">Log In</button>
             </div>
         </div>
+        <span id="log-in-invalid-message" class="invalid-message"></span>
     </div>
 
     <div id="sign-up-form" class="popup display-none">
@@ -106,17 +114,22 @@
         <div class="form">
             <h2>Sign Up</h2>
             <div class="form-element">
+                <label for="name">Name</label>
+                <input type="text" placeholder="Enter full name" id="sign-up-name">
+            </div>
+            <div class="form-element">
                 <label for="email">Email</label>
-                <input type="email" placeholder="Enter email" id="email">
+                <input type="email" placeholder="Enter email" id="sign-up-email">
             </div>
             <div class="form-element">
                 <label for="password">Password</label>
-                <input type="password" name="" id="password" placeholder="Enter password">
+                <input type="password" name="" id="sign-up-password" placeholder="Enter password">
             </div>
             <div class="form-element">
                 <button id="sign-up-button" class="link--button">Sign Up</button>
             </div>
         </div>
+        <span id="sign-up-invalid-message" class="invalid-message"></span>
     </div>
 </body>
 </html>

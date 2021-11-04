@@ -4,6 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import { redirectorRouter } from './routes/redirector.js';
 import { apiRouter } from './routes/api.js';
+import { userRouter } from './routes/user-router.js';
 import { errorHandler } from './error-handling/error-handler.js';
 
 const app = express();
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', apiRouter)
+app.use('/user', userRouter);
 app.use('/', redirectorRouter);
 
 app.use(errorHandler);
