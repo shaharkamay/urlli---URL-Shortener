@@ -49,4 +49,21 @@ const starter = async () => {
 
         cb.writeText(shortLinkElem.textContent);
     })
+
+    document.getElementById('log-in-link').addEventListener('click', () => {
+        closePopups();
+        document.getElementById('log-in-form').classList.remove('display-none');
+    })
+    document.querySelectorAll('.popup .close-btn').forEach(elem => elem.addEventListener('click', () => {
+        closePopups();
+    }));
+
+    document.getElementById('sign-up-link').addEventListener('click', () => {
+        closePopups();
+        document.getElementById('sign-up-form').classList.remove('display-none');
+    })
 };
+
+function closePopups() {
+    document.querySelectorAll('.popup').forEach(elem => elem.classList.add('display-none'));
+}

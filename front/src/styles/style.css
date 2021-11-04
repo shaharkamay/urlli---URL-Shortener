@@ -354,7 +354,54 @@ footer {
     vertical-align: bottom;
 }
 
-
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px;
+    padding: 1em 2em;
+    background-color: var(--background);
+    box-shadow: 2px 2px 20px 10px rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius);
+}
+.popup .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background-color: var(--clr-secondary);
+    color: var(--background);
+    text-align: center;
+    line-height: 15px;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+.popup .form h2 {
+    text-align: center;
+    color: var(--foreground);
+    font-family: var(--font-title);
+}
+.popup .form .form-element {
+    margin: var(--margin-top-element) 0;
+}
+.popup .form .form-element label {
+    color: var(--foreground);
+}
+.popup .form .form-element input[type="email"],
+.popup .form .form-element input[type="password"] {
+    margin-top: 0.3em;
+    padding: 0.7em;
+    display: block;
+    width: 100%;
+    border: 1px solid var(--clr-primary);
+    border-radius: var(--radius);
+}
+.popup .form .form-element button {
+    width: 100%;
+}
 
 
 

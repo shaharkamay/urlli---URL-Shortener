@@ -36,13 +36,13 @@
             
             <nav class="nav row">
                 <ul class="nav__list nav--primary row">
-                    <li class="nav__item"><a href="" class="nav__link">Home</a></li>
-                    <li class="nav__item"><a href="" class="nav__link">About</a></li>
-                    <li class="nav__item"><a href="" class="nav__link">Contact</a></li>
+                    <li class="nav__item"><a href="#" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="#" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="#" class="nav__link">Contact</a></li>
                 </ul>
                 <ul class="nav__list nav--secondary row">
-                    <li class="nav__item"><a href="" class="nav__link">Log In</a></li>
-                    <li class="nav__item"><button class="nav__link link--button">Sign Up</button></li>
+                    <li class="nav__item"><a href="#" class="nav__link" id="log-in-link">Log In</a></li>
+                    <li class="nav__item"><button id="sign-up-link" class="nav__link link--button">Sign Up</button></li>
                 </ul>
             </nav>
         </div>
@@ -65,9 +65,9 @@
                 <button id="shorten-button" class="shorten__button func--button">Shorten</button>
             </div>
             <div class="output display-none">
-                <span class="long-link">dgsgrsgfdgdvxzdgfdgdfgfdghfdhdfhdfhdfhfghgfghdsf</span>
+                <span class="long-link"></span>
                 <span class="short-link-container">
-                    <span class="short-link"><a id="short-link" href="#" target="_blank">dfsd</a></span>
+                    <span class="short-link"><a id="short-link" href="#" target="_blank"></a></span>
                     <span class="copy">
                         <button id="copy-button" class="copy--button">copy</button>
                     </span>
@@ -81,5 +81,42 @@
             <p class="copyright">© Copyright 2021 Shahar Kamay</p>
         </div>
     </footer>
+
+
+    <div id="log-in-form" class="popup display-none">
+        <div class="close-btn">&times;</div>
+        <div class="form">
+            <h2>Log In</h2>
+            <div class="form-element">
+                <label for="email">Email</label>
+                <input type="email" placeholder="Enter email" id="email">
+            </div>
+            <div class="form-element">
+                <label for="password">Password</label>
+                <input type="password" name="" id="password" placeholder="Enter password">
+            </div>
+            <div class="form-element">
+                <button id="log-in-button" class="link--button">Log In</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="sign-up-form" class="popup display-none">
+        <div class="close-btn">&times;</div>
+        <div class="form">
+            <h2>Sign Up</h2>
+            <div class="form-element">
+                <label for="email">Email</label>
+                <input type="email" placeholder="Enter email" id="email">
+            </div>
+            <div class="form-element">
+                <label for="password">Password</label>
+                <input type="password" name="" id="password" placeholder="Enter password">
+            </div>
+            <div class="form-element">
+                <button id="sign-up-button" class="link--button">Sign Up</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
