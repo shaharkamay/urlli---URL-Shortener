@@ -208,9 +208,9 @@ header {
 .nav__list {
     list-style: none;
 }
-.nav__item {
-    /* margin-top: 0.5em; */
-}
+/* .nav__item {
+    margin-top: 0.5em;
+} */
 .nav__link {
     text-decoration: none;
     color: var(--foreground);
@@ -308,6 +308,7 @@ main {
     width: 50%;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
     color: var(--foreground);
 }
 

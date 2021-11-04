@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./images/url-logo.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <title>URL Shortener</title>
 <script defer src="./index.js"></script></head>
 <body>
@@ -60,15 +61,15 @@
     <main>
         <div class="container shorten--container">
             <div class="shorten">
-                <input type="text" class="shorten__input" placeholder="Shorten your link">
-                <button class="shorten__button func--button">Shorten</button>
+                <input id="shorten-input" type="text" class="shorten__input" placeholder="Shorten your link">
+                <button id="shorten-button" class="shorten__button func--button">Shorten</button>
             </div>
             <div class="output display-none">
                 <span class="long-link">dgsgrsgfdgdvxzdgfdgdfgfdghfdhdfhdfhdfhfghgfghdsf</span>
                 <span class="short-link-container">
-                    <span class="short-link"><a href="#" target="_blank">dfsd</a></span>
+                    <span class="short-link"><a id="short-link" href="#" target="_blank">dfsd</a></span>
                     <span class="copy">
-                        <button class="copy--button">copy</button>
+                        <button id="copy-button" class="copy--button">copy</button>
                     </span>
                 </span>
             </div>

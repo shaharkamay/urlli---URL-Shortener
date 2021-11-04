@@ -1,7 +1,8 @@
 export { starter };
 import { applyTheme } from './event-handlers';
+import { shortenUrl } from '../network/api.js';
 
-const starter = () => {
+const starter = async () => {
     // dark/light theme
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem("theme") || "auto";
@@ -24,5 +25,28 @@ const starter = () => {
 
     hamburger.addEventListener("click", () => {
         nav.classList.toggle("nav--visible");
+    })
+
+    document.getElementById('shorten-button').addEventListener('click', async () => {
+        const url = document.getElementById('shorten-input').value;
+        const shortUrl = await shortenUrl(url);
+        document.querySelector('.output').classList.remove('display-none');
+        document.querySelector('.long-link').textContent = url;
+        const shortLinkElem = document.getElementById('short-link');
+        shortLinkElem.href = shortUrl;
+        shortLinkElem.textContent = shortUrl;
+    })
+
+    document.getElementById('copy-button').addEventListener('click', () => {
+        const cb = navigator.clipboard;
+        const shortLinkElem = document.getElementById('short-link');
+        
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(shortLinkElem);
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        cb.writeText(shortLinkElem.textContent);
     })
 };

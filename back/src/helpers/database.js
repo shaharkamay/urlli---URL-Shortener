@@ -27,14 +27,16 @@ function getDbObject() {
 
 function getUrlByShortUrl(shortUrl) {
     const databaseObj = getDbObject();
-    const url = databaseObj.urls.find(urlObj => urlObj.shortUrl === shortUrl).url;
-    return url
+    const urlObj = databaseObj.urls.find(urlObj => urlObj.shortUrl === shortUrl);
+    if(urlObj) return urlObj.url;
+    return null;
 }
 
 function getShortUrlByUrl(url) {
     const databaseObj = getDbObject();
-    const shortUrl = databaseObj.urls.find(urlObj => urlObj.url === url).shortUrl;
-    return shortUrl
+    const urlObj = databaseObj.urls.find(urlObj => urlObj.url === url);
+    if(urlObj) return urlObj.shortUrl;
+    return null
 }
 
 function isShortUrlExists(shortUrl) {
