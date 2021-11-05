@@ -1,17 +1,20 @@
 export { redirectorRouter };
 import express from 'express';
 import { domain } from '../helpers/constants.js'
-import { addNewUrl, getUrlByShortUrl, getShortUrlByUrl } from '../helpers/database.js'
+import { Database } from '../database/database.js'
 
 const redirectorRouter = express.Router();
 
-redirectorRouter.get('/:code', (req, res, next) => {
+redirectorRouter.get('/:shortUrlId', (req, res, next) => {
     try {
-        const code = req.params.code;
-        const shortUrl = domain + code;
-        const url = getUrlByShortUrl(shortUrl);
+        const shortUrlId = req.params.shortUrlId;
+        const db = new Database('./urls');
+        const data = db.get(shortUrlId);
+        const redirectCount = data.value.redirectCount + 1;
+        data.value = { url: data.value.url, shortUrlId: data.value.shortUrlId, redirectCount, creationDate: data.value.creationDate };
+        const url = data.value.url;
         if(url) res.redirect(301, url);
-        else next({status: 401, message: "this url does not exist!"});
+        else next(401);
     } catch (error) {
         next(error);
     }

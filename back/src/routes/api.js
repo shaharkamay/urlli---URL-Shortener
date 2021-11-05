@@ -1,6 +1,6 @@
 export { apiRouter };
 import express from 'express';
-import { addNewUrl, getUrlByShortUrl, getShortUrlByUrl, isShortUrlExists } from '../helpers/database.js'
+import { Database } from '../database/database.js'
 import { domain } from '../helpers/constants.js'
 
 const apiRouter = express.Router();
@@ -8,10 +8,12 @@ const apiRouter = express.Router();
 apiRouter.post('/shorten', (req, res, next) => {
     try {
         const url = req.body.url;
-        let shortUrl = domain + Math.random().toString(36).substr(2, 4);
-        while(isShortUrlExists(shortUrl)) shortUrl = domain + Math.random().toString(36).substr(2, 4);
-        addNewUrl(shortUrl, url);
-        res.json(shortUrl);  
+        const db = new Database('./urls');
+        let shortUrlId = Math.random().toString(36).substr(2, 4);
+        while(db.isKeyExists(shortUrlId)) shortUrlId = Math.random().toString(36).substr(2, 4);
+        const creationDate = new Date().toLocaleString();
+        db.store(shortUrlId, { url, shortUrlId, redirectCount: 0, creationDate });
+        res.json(domain + shortUrlId);  
         res.end();
     } catch (error) {
         next(error);

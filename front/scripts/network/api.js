@@ -28,7 +28,8 @@ async function shortenUrl(originUrl, username) {
 }
 
 async function addUser(user) {
-    await postData(`${baseURL}user/sign-up`, user);
+    const userName = await postData(`${baseURL}user/sign-up`, user);
+    return userName;
 }
 
 async function loginUser(email, password) {
@@ -38,5 +39,6 @@ async function loginUser(email, password) {
             password
         }
     });
+    if(userName.status) return null;
     return userName;
 }

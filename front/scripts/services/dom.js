@@ -7,8 +7,8 @@ const starter = async () => {
     if(name) {
         document.querySelector('.hello-user').textContent = `Hello ${name}`;
         document.getElementById('sign-up-link').classList.add('display-none');
+        document.getElementById('log-in-link').classList.add('display-none');
         document.querySelector('.intro').classList.add('display-none');
-
     }
 
     // dark/light theme
@@ -76,7 +76,7 @@ const starter = async () => {
     })
 
 
-    document.getElementById('sign-up-button').addEventListener('click', () => {
+    document.getElementById('sign-up-button').addEventListener('click', async () => {
         const name = document.getElementById('sign-up-name').value;
         let isName = true;
         name.split(' ').forEach(word => {
@@ -102,7 +102,11 @@ const starter = async () => {
             return;
         }
 
-        addUser({ name, email, password });
+        const userName = await addUser({ name, email, password });
+        if(userName) {
+            localStorage.setItem('name', userName);
+            window.location.reload();
+        }
         closePopups();
     })
 
