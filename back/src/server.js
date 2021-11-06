@@ -14,13 +14,13 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-app.use('/', express.static(path.resolve('../front/dist')));
+app.use('/', express.static(path.resolve('./dist')));
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve('../front/dist/index.html'))
+    res.sendFile(path.resolve('./dist/index.html'))
 });
 
 app.get('/analytics', (req, res) => {
-    res.sendFile(path.resolve('../front/dist/analytics.html'))
+    res.sendFile(path.resolve('./dist/analytics.html'))
 });
     
 app.use('/api', apiRouter)
