@@ -11,7 +11,7 @@ userRouter.post('/sign-up', (req, res, next) => {
         const password = req.body.password;
         const db = new Database('./users');
         db.store(email, { name, email, password });
-        res.json(name);
+        res.json({ name, email });
         res.end();
     } catch (error) {
         next(error)
@@ -26,7 +26,7 @@ userRouter.get('/log-in', (req, res, next) => {
         const user = db.get(email);
         if(user.value) {
             if(user.value.password === password) {
-                res.json(user.value.name);
+                res.json(user.value);
                 res.end();
             } else {
                 next(401)

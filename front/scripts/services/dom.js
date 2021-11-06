@@ -76,9 +76,10 @@ const starter = () => {
             return;
         }
 
-        const userName = await addUser({ name, email, password });
-        if(userName) {
-            localStorage.setItem('name', userName);
+        const user = await addUser({ name, email, password });
+        if(user) {
+            localStorage.setItem('name', user.name);
+            localStorage.setItem('userEmail', user.email)
             window.location.reload();
         }
         closePopups();
@@ -98,9 +99,10 @@ const starter = () => {
             return;
         }
 
-        const userName = await loginUser(email, password);
-        if(userName) {
-            localStorage.setItem('name', userName);
+        const user = await loginUser(email, password);
+        if(user) {
+            localStorage.setItem('name', user.name);
+            localStorage.setItem('userEmail', user.email);
             window.location.reload();
         }
         closePopups();
@@ -115,7 +117,8 @@ const indexStarter = async () => {
 
     document.getElementById('shorten-button').addEventListener('click', async () => {
         const url = document.getElementById('shorten-input').value;
-        const shortUrl = await shortenUrl(url);
+        const userEmail = localStorage.getItem('userEmail');
+        const shortUrl = await shortenUrl(url, userEmail);
         document.querySelector('.output').classList.remove('display-none');
         document.querySelector('.long-link').textContent = url;
         const shortLinkElem = document.getElementById('short-link');

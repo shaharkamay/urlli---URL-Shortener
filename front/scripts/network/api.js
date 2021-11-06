@@ -21,8 +21,8 @@ async function postData(url, headers) {
     return response.data;
 }
 
-async function shortenUrl(originUrl, username) {
-    const shortUrl = await postData(`${baseURL}api/shorten`, { url: originUrl });
+async function shortenUrl(originUrl, userEmail) {
+    const shortUrl = await postData(`${baseURL}api/shorten`, { url: originUrl, userEmail });
     return shortUrl;
 }
 
@@ -32,14 +32,14 @@ async function addUser(user) {
 }
 
 async function loginUser(email, password) {
-    const userName = await getData(`${baseURL}user/log-in`, {
+    const user = await getData(`${baseURL}user/log-in`, {
         headers: {
             email,
             password
         }
     });
-    if(userName.status) return null;
-    return userName;
+    // if(user.status) return null;
+    return user;
 }
 
 async function getAnalytics(shortUrlId) {
