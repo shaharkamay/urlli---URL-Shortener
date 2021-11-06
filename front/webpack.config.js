@@ -9,7 +9,7 @@ module.exports = {
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: './',
+    publicPath: '../',
     assetModuleFilename: "images/[name][ext][query]",
     clean: true,
   },
@@ -26,6 +26,10 @@ module.exports = {
       template: './src/index.html',
       filename: "./index.html"
     }),
+    new HtmlWebpackPlugin({
+      template: './src/analytics.html',
+      filename: "./analytics.html"
+    }),
     new MiniCssExtractPlugin({
       filename: "[name].css"
     }),
@@ -33,7 +37,7 @@ module.exports = {
   module: {
     rules: [
         { test: /\.css$/i, use: ["style-loader", "css-loader"] },
-        { test: /\.scss$/i, use: ["style-loader", "css-loader", "sass-loader"] },
+        // { test: /\.scss$/i, use: ["style-loader", "css-loader", "sass-loader"] },
         { test: /\.(svg|ico|png|webp|jpg|gif|jpeg)$/, type: 'asset/resource' },
     ]
   },

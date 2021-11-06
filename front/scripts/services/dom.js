@@ -1,17 +1,16 @@
-export { starter };
+export { starter, indexStarter, analyticsStarter };
 import { applyTheme } from './event-handlers';
-import { shortenUrl, addUser, loginUser } from '../network/api.js';
+import { shortenUrl, addUser, loginUser, getAnalytics } from '../network/api.js';
 
-const starter = async () => {
+const starter = () => {
     const name = localStorage.getItem('name');
     if(name) {
         document.querySelector('.hello-user').textContent = `Hello ${name}`;
         document.getElementById('sign-up-link').classList.add('display-none');
         document.getElementById('log-in-link').classList.add('display-none');
-        document.querySelector('.intro').classList.add('display-none');
     }
 
-    // dark/light theme
+    // Dark/light theme
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem("theme") || "auto";
         
@@ -27,7 +26,7 @@ const starter = async () => {
         });
     });
 
-    //hamburger menu
+    //Hamburger menu
     const hamburger = document.querySelector(".nav-toggle");
     const nav = document.querySelector(".nav");
 
@@ -35,29 +34,7 @@ const starter = async () => {
         nav.classList.toggle("nav--visible");
     })
 
-    document.getElementById('shorten-button').addEventListener('click', async () => {
-        const url = document.getElementById('shorten-input').value;
-        const shortUrl = await shortenUrl(url);
-        document.querySelector('.output').classList.remove('display-none');
-        document.querySelector('.long-link').textContent = url;
-        const shortLinkElem = document.getElementById('short-link');
-        shortLinkElem.href = shortUrl;
-        shortLinkElem.textContent = shortUrl;
-    })
-
-    document.getElementById('copy-button').addEventListener('click', () => {
-        const cb = navigator.clipboard;
-        const shortLinkElem = document.getElementById('short-link');
-        
-        const selection = window.getSelection();
-        const range = document.createRange();
-        range.selectNodeContents(shortLinkElem);
-        selection.removeAllRanges();
-        selection.addRange(range);
-
-        cb.writeText(shortLinkElem.textContent);
-    })
-
+    //Log In and Sign Up
     document.getElementById('log-in-link').addEventListener('click', () => {
         closePopups();
         document.getElementById('log-in-form').classList.remove('display-none');
@@ -70,10 +47,7 @@ const starter = async () => {
         closePopups();
         document.getElementById('sign-up-form').classList.remove('display-none');
     })
-    document.getElementById('get-started-button').addEventListener('click', () => {
-        closePopups();
-        document.getElementById('sign-up-form').classList.remove('display-none');
-    })
+    
 
 
     document.getElementById('sign-up-button').addEventListener('click', async () => {
@@ -131,8 +105,81 @@ const starter = async () => {
         }
         closePopups();
     })
+}
+
+const indexStarter = async () => {
+    const name = localStorage.getItem('name');
+    if(name) {
+        document.querySelector('.intro').classList.add('display-none');
+    }
+
+    document.getElementById('shorten-button').addEventListener('click', async () => {
+        const url = document.getElementById('shorten-input').value;
+        const shortUrl = await shortenUrl(url);
+        document.querySelector('.output').classList.remove('display-none');
+        document.querySelector('.long-link').textContent = url;
+        const shortLinkElem = document.getElementById('short-link');
+        shortLinkElem.href = shortUrl;
+        shortLinkElem.textContent = shortUrl;
+    })
+
+    document.getElementById('copy-button').addEventListener('click', () => {
+        const cb = navigator.clipboard;
+        const shortLinkElem = document.getElementById('short-link');
+        
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(shortLinkElem);
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        cb.writeText(shortLinkElem.textContent);
+    })
+
+    document.getElementById('get-started-button').addEventListener('click', () => {
+        closePopups();
+        document.getElementById('sign-up-form').classList.remove('display-none');
+    })
 };
+
+const analyticsStarter = () => {
+    document.getElementById('analyze-button').addEventListener('click', async () => {
+        const link = document.getElementById('analyze-input').value;
+        const shortUrlId = link.substr(link.lastIndexOf('/') + 1);
+        const analytics = await getAnalytics(shortUrlId);
+        renderAnalytics(analytics);
+    })
+} 
 
 function closePopups() {
     document.querySelectorAll('.popup').forEach(elem => elem.classList.add('display-none'));
+}
+
+function renderAnalytics(analytics) {
+    const analyticsDiv = createElement('div', [], ['analytics']);
+    
+        for (const key in analytics.data) {
+            const analyticsTitle = createElement('p', [key], ['analytics__title'])
+            let analyticsValue;
+            analyticsValue = createElement('p', [analytics.data[key]], ['analytics__value'])
+            if(key === 'url') analyticsValue = createElement('a', [analytics.data[key]], ['analytics__value'], {href: analytics.data[key]})
+        
+            const analyticsProp = createElement('div', [analyticsTitle, analyticsValue], ['analytics__prop'])
+            analyticsDiv.append(analyticsProp);
+        }
+        const analyticsTitle = createElement('p', ['Last clicked'], ['analytics__title'])
+        const analyticsValue = createElement('p', [analytics.timestamp], ['analytics__value'])
+    
+        const analyticsProp = createElement('div', [analyticsTitle, analyticsValue], ['analytics__prop'])
+        analyticsDiv.append(analyticsProp);
+        document.querySelector('main .container').append(analyticsDiv);
+}
+
+function createElement(tagName, children = [], classes = [], attributes = {}, eventListeners = {}) {
+    const element = document.createElement(tagName);
+    for(const child of children) element.append(child);
+    element.classList = classes.join(" ");
+    for(const attr in attributes) element.setAttribute(attr, attributes[attr]);
+    for(const event in eventListeners) element.addEventListener(event, eventListeners[event]);
+    return element;
 }

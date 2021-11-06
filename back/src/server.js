@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve('../front/dist/index.html'))
 });
 
+app.get('/analytics', (req, res) => {
+    res.sendFile(path.resolve('../front/dist/analytics.html'))
+});
+    
 app.use('/api', apiRouter)
 app.use('/user', userRouter);
 app.use('/', redirectorRouter);

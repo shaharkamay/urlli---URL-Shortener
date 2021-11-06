@@ -19,3 +19,15 @@ apiRouter.post('/shorten', (req, res, next) => {
         next(error);
     }
 })
+
+apiRouter.get('/analytics/:shortUrlId', (req, res, next) => {
+    try {
+        const shortUrlId = req.params.shortUrlId;
+        const db = new Database('./urls');
+        const data = db.get(shortUrlId);
+        res.json({ data: data.value, timestamp: data.timestamp });
+        res.end();
+    } catch (error) {
+        next(400);
+    }
+})

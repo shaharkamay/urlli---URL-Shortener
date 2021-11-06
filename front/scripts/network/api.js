@@ -1,4 +1,4 @@
-export { shortenUrl, addUser, loginUser };
+export { shortenUrl, addUser, loginUser, getAnalytics };
 // import axios from 'axios';
 
 const baseURL = 'http://localhost:3000/';
@@ -9,7 +9,6 @@ async function getData(url, headers) {
     // if(response.data.status >= 400) {
     //     displayMessage(response.data.message);
     // }
-
     return response.data;
 }
 
@@ -41,4 +40,9 @@ async function loginUser(email, password) {
     });
     if(userName.status) return null;
     return userName;
+}
+
+async function getAnalytics(shortUrlId) {
+    const analytics = await getData(`${baseURL}api/analytics/${shortUrlId}`);
+    return analytics;
 }

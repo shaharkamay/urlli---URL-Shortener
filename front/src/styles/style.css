@@ -422,6 +422,50 @@ footer {
 
 
 
+.analytics {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: var(--background);
+    padding: 1em;
+    color: var(--foreground);
+    border-radius: var(--radius);
+}
+.analytics__prop {
+    display: flex;
+    border: 1px solid #979797;
+    border-radius: var(--radius);
+}
+.analytics__title {
+    width: 20%;
+    padding: 1em;
+    
+}
+.analytics__value {
+    width: 80%;
+    padding: 1em;
+    border-left: 1px solid #979797;
+}
+
+.analyze-link {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.analyze-link__input {
+    width: 100%;
+    padding: 1em;
+    height: 4em;
+    border: none;
+    font-size: inherit;
+    border: 1px solid var(--clr-primary);
+    border-radius: var(--radius);
+}
+
 
 @media (min-width: 700pX) {
     :root {

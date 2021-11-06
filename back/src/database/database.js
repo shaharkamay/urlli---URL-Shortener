@@ -68,7 +68,7 @@ class Entry {
 
     constructor(data, timestamp, updaterCb) {
         this.#data = data;
-        this.#timestamp = new Date(timestamp);
+        this.#timestamp = timestamp;
         this.#updaterCb = updaterCb;
     }
 
