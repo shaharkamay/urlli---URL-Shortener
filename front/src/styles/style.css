@@ -375,8 +375,7 @@ footer {
     width: 90%;
     max-width: 400px;
     padding: 1em 2em;
-    background-color: var(--background);
-    box-shadow: 0 0 300px 2px var(--foreground);
+    background-color: var(--foreground);
     border-radius: var(--radius);
 }
 .popup .close-btn {
@@ -386,7 +385,7 @@ footer {
     width: 15px;
     height: 15px;
     background-color: var(--clr-secondary);
-    color: var(--background);
+    color: var(--foreground);
     text-align: center;
     line-height: 15px;
     border-radius: var(--radius);
@@ -394,14 +393,14 @@ footer {
 }
 .popup .form h2 {
     text-align: center;
-    color: var(--foreground);
+    color: var(--background);
     font-family: var(--font-title);
 }
 .popup .form .form-element {
     margin: var(--margin-top-element) 0;
 }
 .popup .form .form-element label {
-    color: var(--foreground);
+    color: var(--background);
 }
 .popup .form .form-element input[type="text"],
 .popup .form .form-element input[type="email"],

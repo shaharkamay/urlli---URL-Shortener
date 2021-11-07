@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/url-logo.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+    <title>Analytics</title>
+<script defer src="../index.js"></script></head>
+<body>
+    <header>
+        <div class="container row">
+            <div class="logo-and-theme">
+                <div class="mobile-nav">
+                    <button class="nav-toggle">
+                        <span class="hamburger"></span>
+                        <span class="hamburger"></span>
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+                <a href="/" class="logo">
+                    <img class="logo-img" src="../images/url-logo.png" alt="">
+                </a>
+                <div class="theme">
+                    <label id="theme-icon" class="theme-icon"></label>
+                    <select class="select-theme" id="select-theme">
+                        <option value="auto">Auto</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
+
+            </div>
+            
+            
+            <nav class="nav row">
+                <ul class="nav__list nav--primary row">
+                    <li class="nav__item"><a href="/" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="/analytics" class="nav__link">Analytics</a></li>
+                    <li class="nav__item"><a href="/dashboard" class="nav__link">Dashboard</a></li>
+                </ul>
+                <ul class="nav__list nav--secondary row">
+                    <li class="nav__item"><a class="nav__link" id="log-in-link">Log In</a></li>
+                    <li class="nav__item"><button id="sign-up-link" class="nav__link link--button">Sign Up</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hello">
+        <div class="container">
+            <span class="hello-user">Hello guest</span>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <div class="analyze-link">
+                <input id="analyze-input" type="text" class="analyze-link__input" placeholder="Analyze link">
+                <button id="analyze-button" class="analyze-link__button func--button">Analyze</button>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p class="copyright">© Copyright 2021 Shahar Kamay</p>
+        </div>
+    </footer>
+
+    <div id="log-in-form" class="popup display-none">
+        <div class="close-btn">&times;</div>
+        <div class="form">
+            <h2>Log In</h2>
+            <div class="form-element">
+                <label for="email">Email</label>
+                <input type="email" placeholder="Enter email" id="log-in-email">
+            </div>
+            <div class="form-element">
+                <label for="password">Password</label>
+                <input type="password" name="" id="log-in-password" placeholder="Enter password">
+            </div>
+            <div class="form-element">
+                <button id="log-in-button" class="link--button">Log In</button>
+            </div>
+        </div>
+        <span id="log-in-invalid-message" class="invalid-message"></span>
+    </div>
+
+    <div id="sign-up-form" class="popup display-none">
+        <div class="close-btn">&times;</div>
+        <div class="form">
+            <h2>Sign Up</h2>
+            <div class="form-element">
+                <label for="name">Name</label>
+                <input type="text" placeholder="Enter full name" id="sign-up-name">
+            </div>
+            <div class="form-element">
+                <label for="email">Email</label>
+                <input type="email" placeholder="Enter email" id="sign-up-email">
+            </div>
+            <div class="form-element">
+                <label for="password">Password</label>
+                <input type="password" name="" id="sign-up-password" placeholder="Enter password">
+            </div>
+            <div class="form-element">
+                <button id="sign-up-button" class="link--button">Sign Up</button>
+            </div>
+        </div>
+        <span id="sign-up-invalid-message" class="invalid-message"></span>
+    </div>
+
+    <section class="errors display-none">
+        <div class="error">
+            <div class="error__header">
+                <strong>URL-Shortener</strong>
+                <button id="error__close">×</button>
+            </div>
+            <div class="error__body">
+                <small class="error__message"></small>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
