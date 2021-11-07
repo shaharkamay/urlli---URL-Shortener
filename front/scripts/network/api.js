@@ -1,7 +1,7 @@
 export { shortenUrl, addUser, loginUser, getAnalytics, getUserUrls };
 import { displayMessage } from '../services/dom.js';
 
-const baseURL = 'http://localhost:3000/';
+const baseURL = 'https://urlli.herokuapp.com/';
 
 async function getData(url, headers) {
     const response = await axios.get(url, headers).catch((err) => {
