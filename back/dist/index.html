@@ -20,7 +20,7 @@
                         <span class="hamburger"></span>
                     </button>
                 </div>
-                <a href="" class="logo">
+                <a href="/" class="logo">
                     <img class="logo-img" src="./images/url-logo.png" alt="">
                 </a>
                 <div class="theme">
@@ -39,10 +39,10 @@
                 <ul class="nav__list nav--primary row">
                     <li class="nav__item"><a href="/" class="nav__link">Home</a></li>
                     <li class="nav__item"><a href="/analytics" class="nav__link">Analytics</a></li>
-                    <li class="nav__item"><a href="#" class="nav__link">Contact</a></li>
+                    <li class="nav__item"><a href="/dashboard" class="nav__link">Dashboard</a></li>
                 </ul>
                 <ul class="nav__list nav--secondary row">
-                    <li class="nav__item"><a href="#" class="nav__link" id="log-in-link">Log In</a></li>
+                    <li class="nav__item"><a class="nav__link" id="log-in-link">Log In</a></li>
                     <li class="nav__item"><button id="sign-up-link" class="nav__link link--button">Sign Up</button></li>
                 </ul>
             </nav>
@@ -131,5 +131,17 @@
         </div>
         <span id="sign-up-invalid-message" class="invalid-message"></span>
     </div>
+
+    <section class="errors display-none">
+        <div class="error">
+            <div class="error__header">
+                <strong>URL-Shortener</strong>
+                <button id="error__close">×</button>
+            </div>
+            <div class="error__body">
+                <small class="error__message"></small>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

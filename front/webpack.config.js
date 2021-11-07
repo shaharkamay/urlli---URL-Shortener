@@ -30,6 +30,10 @@ module.exports = {
       template: './src/analytics.html',
       filename: "./analytics.html"
     }),
+    new HtmlWebpackPlugin({
+      template: './src/dashboard.html',
+      filename: "./dashboard.html"
+    }),
     new MiniCssExtractPlugin({
       filename: "[name].css"
     }),

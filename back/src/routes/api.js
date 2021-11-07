@@ -8,7 +8,7 @@ const apiRouter = express.Router();
 apiRouter.post('/shorten', (req, res, next) => {
     try {
         const url = req.body.url;
-        const userEmail = req.body.userEmail; //stopped hereeeeeeeeeeeeeeeeeeeeeeee
+        const userEmail = req.body.userEmail;
         const db = new Database('./urls');
         let shortUrlId = Math.random().toString(36).substr(2, 4);
         while(db.isKeyExists(shortUrlId)) shortUrlId = Math.random().toString(36).substr(2, 4);
@@ -21,6 +21,8 @@ apiRouter.post('/shorten', (req, res, next) => {
                 const shortUrlIds = userData.value.shortUrlIds ? userData.value.shortUrlIds : [];
                 shortUrlIds.push(shortUrlId);
                 userData.value = { name: userData.value.name, email: userData.value.email, password: userData.value.password, shortUrlIds }
+            } else {
+                next({ status: 401, message: 'Unauthorized email' })
             }
         }
         res.json(domain + shortUrlId);  
@@ -34,10 +36,43 @@ apiRouter.get('/analytics/:shortUrlId', (req, res, next) => {
     try {
         const shortUrlId = req.params.shortUrlId;
         const db = new Database('./urls');
-        const data = db.get(shortUrlId);
-        res.json({ data: data.value, timestamp: data.timestamp });
-        res.end();
+        if(db.isKeyExists(shortUrlId)) {
+            const data = db.get(shortUrlId);
+            res.json({ data: data.value, timestamp: data.timestamp });
+            res.end();
+        } else next({ status: 404, message: 'Url short key not found' });
     } catch (error) {
-        next(400);
+        next(error);
+    }
+})
+
+apiRouter.get('/dashboard/urls', (req, res, next) => {
+    try {
+        const userEmail = req.headers.useremail;
+        const usersDb = new Database('./users');
+        const urlsDb = new Database('./urls');
+        if(usersDb.isKeyExists(userEmail)) {
+            const userData = usersDb.get(userEmail);
+            const shortUrlIds = userData.value.shortUrlIds;
+            if(shortUrlIds && shortUrlIds.length > 0) {
+                const urls = [];
+                for (const shortUrlId of shortUrlIds) {
+                    if(urlsDb.isKeyExists(shortUrlId)) {
+                        const data = urlsDb.get(shortUrlId);
+                        const shortUrl = domain + shortUrlId;
+                        const longUrl = data.value.url;
+                        urls.push({ shortUrl, longUrl });
+                    } else next({ status: 404, message: 'Url short key not found' })
+                }
+                res.json(urls);
+                res.end();
+            } else {
+                next({ status: 404, message: 'User did not create links yet' });
+            }
+        } else {
+            next({ status: 401, message: 'Unauthorized email' })
+        }
+    } catch (error) {
+        next(error)
     }
 })

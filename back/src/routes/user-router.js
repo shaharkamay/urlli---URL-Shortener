@@ -23,17 +23,15 @@ userRouter.get('/log-in', (req, res, next) => {
         const email = req.headers.email;
         const password = req.headers.password;
         const db = new Database('./users');
-        const user = db.get(email);
-        if(user.value) {
+        if(db.isKeyExists(email)) {
+            const user = db.get(email);
             if(user.value.password === password) {
                 res.json(user.value);
                 res.end();
             } else {
-                next(401)
+                next({ status: 401, message: 'Incorrect Password!' })
             }
-        } else {
-            next(401)
-        }
+        } else next({ status: 401, message: 'Incorrect Email!' })
     } catch (error) {
         next(error);
     }

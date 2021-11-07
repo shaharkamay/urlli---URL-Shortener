@@ -214,6 +214,7 @@ header {
 .nav__link {
     text-decoration: none;
     color: var(--foreground);
+    cursor: pointer;
 }
 .nav__link:hover,
 .nav__link:focus {
@@ -432,20 +433,31 @@ footer {
     color: var(--foreground);
     border-radius: var(--radius);
 }
+.analytics a:link {
+    color: #8ab4f8;
+}
+.analytics a:visited {
+    color: #c58af9;
+}
 .analytics__prop {
     display: flex;
     border: 1px solid #979797;
     border-radius: var(--radius);
 }
 .analytics__title {
-    width: 20%;
+    width: 35%;
     padding: 1em;
-    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .analytics__value {
-    width: 80%;
+    width: 65%;
     padding: 1em;
     border-left: 1px solid #979797;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .analyze-link {
@@ -463,6 +475,82 @@ footer {
     border: none;
     font-size: inherit;
     border: 1px solid var(--clr-primary);
+    border-radius: var(--radius);
+}
+
+.links {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: var(--background);
+    padding: 1em;
+    color: var(--foreground);
+    border-radius: var(--radius);
+}
+.links a:link {
+    color: #8ab4f8;
+}
+.links a:visited {
+    color: #c58af9;
+}
+.links__title {
+    font-family: var(--font-title);
+    color: var(--foreground);
+}
+.links__prop {
+    display: flex;
+    border: 1px solid #979797;
+    border-radius: var(--radius);
+}
+.links__short {
+    width: 35%;
+    padding: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.links__long {
+    width: 65%;
+    padding: 1em;
+    border-left: 1px solid #979797;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.error {
+    position: absolute;
+    left: 1em;
+    bottom: 1em;
+    background-color: red;
+    padding: 0.5em;
+    box-shadow: 0 0 300px 2px var(--foreground);
+    border-radius: var(--radius);
+}
+.error__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 0.5em;
+}
+#error__close {
+    background-color: var(--clr-secondary);
+    color: var(--clr-light);
+    text-align: center;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+.error strong {
+    color: var(--clr-light);
+    font-weight: bold;
+}
+.error__body {
+    background-color: rgb(255, 228, 233);
+    color: red;
+    padding: 0.5em;
     border-radius: var(--radius);
 }
 

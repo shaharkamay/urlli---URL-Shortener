@@ -7,7 +7,7 @@
     <link rel="icon" href="../images/url-logo.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
-    <title>URL Shortener</title>
+    <title>Analytics</title>
 <script defer src="../index.js"></script></head>
 <body>
     <header>
@@ -20,7 +20,7 @@
                         <span class="hamburger"></span>
                     </button>
                 </div>
-                <a href="" class="logo">
+                <a href="/" class="logo">
                     <img class="logo-img" src="../images/url-logo.png" alt="">
                 </a>
                 <div class="theme">
@@ -42,7 +42,7 @@
                     <li class="nav__item"><a href="/dashboard" class="nav__link">Dashboard</a></li>
                 </ul>
                 <ul class="nav__list nav--secondary row">
-                    <li class="nav__item"><a href="#" class="nav__link" id="log-in-link">Log In</a></li>
+                    <li class="nav__item"><a class="nav__link" id="log-in-link">Log In</a></li>
                     <li class="nav__item"><button id="sign-up-link" class="nav__link link--button">Sign Up</button></li>
                 </ul>
             </nav>
@@ -61,17 +61,6 @@
                 <input id="analyze-input" type="text" class="analyze-link__input" placeholder="Analyze link">
                 <button id="analyze-button" class="analyze-link__button func--button">Analyze</button>
             </div>
-            
-            <!-- <div class="analytics">
-                <div class="analytics__prop">
-                    <p class="analytics__title">1</p>
-                    <p class="analytics__value">2</p>
-                </div>
-                <div class="analytics__prop">
-                    <p class="analytics__title">1</p>
-                    <p class="analytics__value">2</p>
-                </div>
-            </div> -->
         </div>
     </main>
     
@@ -122,5 +111,17 @@
         </div>
         <span id="sign-up-invalid-message" class="invalid-message"></span>
     </div>
+
+    <section class="errors display-none">
+        <div class="error">
+            <div class="error__header">
+                <strong>URL-Shortener</strong>
+                <button id="error__close">×</button>
+            </div>
+            <div class="error__body">
+                <small class="error__message"></small>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

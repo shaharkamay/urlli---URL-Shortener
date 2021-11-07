@@ -6,21 +6,25 @@ import { redirectorRouter } from './routes/redirector.js';
 import { apiRouter } from './routes/api.js';
 import { userRouter } from './routes/user-router.js';
 import { errorHandler } from './error-handling/error-handler.js';
+// import { userHandler } from './middleware/user-handler.js'; //not working for some reason...
 
 const app = express();
-// const port = process.env.PORT || 3000;
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 
 app.use('/', express.static(path.resolve('./dist')));
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve('./dist/index.html'))
+    res.sendFile(path.resolve('./dist/index.html'));
 });
 
 app.get('/analytics', (req, res) => {
-    res.sendFile(path.resolve('./dist/analytics.html'))
+    res.sendFile(path.resolve('./dist/analytics.html'));
+});
+
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.resolve('./dist/dashboard.html'));
 });
     
 app.use('/api', apiRouter)
