@@ -1,6 +1,5 @@
-export { userRouter };
-import { Database } from '../database/database.js';
-import express from 'express';
+const { Database } = require('../database/database.js');
+const express = require('express');
 
 const userRouter = express.Router();
 
@@ -36,3 +35,6 @@ userRouter.get('/log-in', (req, res, next) => {
         next(error);
     }
 })
+
+
+module.exports = { userRouter };

@@ -1,5 +1,4 @@
-export { userHandler };
-import { Database } from '../database/database.js';
+const { Database } = require('../database/database.js');
 
 // not working for some reasons
 const userHandler = (err, req, res, next) => {
@@ -13,3 +12,5 @@ const userHandler = (err, req, res, next) => {
     }
 
 }
+
+module.exports = { userHandler };

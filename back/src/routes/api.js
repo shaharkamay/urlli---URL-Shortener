@@ -1,7 +1,6 @@
-export { apiRouter };
-import express from 'express';
-import { Database } from '../database/database.js'
-import { domain } from '../helpers/constants.js'
+const express = require('express');
+const { Database } = require('../database/database.js')
+const { domain } = require('../helpers/constants.js')
 
 const apiRouter = express.Router();
 
@@ -76,3 +75,6 @@ apiRouter.get('/dashboard/urls', (req, res, next) => {
         next(error)
     }
 })
+
+
+module.exports = { apiRouter };
