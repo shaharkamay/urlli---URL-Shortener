@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../images/url-logo.png">
+    <link rel="icon" href="./images/url-logo.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
-    <title>Analytics</title>
-<script defer src="../scripts/analytics.js"></script></head>
+    <title>URL Shortener</title>
+<script defer src="../scripts/sign-up.js"></script></head>
 <body>
     <header>
         <div class="container row">
@@ -21,7 +21,7 @@
                     </button>
                 </div>
                 <a href="/" class="logo">
-                    <img class="logo-img" src="../images/url-logo.png" alt="">
+                    <img class="logo-img" src="./images/url-logo.png" alt="">
                 </a>
                 <div class="theme">
                     <label id="theme-icon" class="theme-icon"></label>
@@ -42,8 +42,7 @@
                     <li class="nav__item"><a href="/dashboard" class="nav__link">Dashboard</a></li>
                 </ul>
                 <ul class="nav__list nav--secondary row">
-                    <li class="nav__item"><a href="/log-in" class="nav__link" id="log-in-link">Log In</a></li>
-                    <li class="nav__item"><a href="sign-up" id="sign-up-link" class="nav__link link--button">Sign Up</a></li>
+                    <li class="nav__item"><a href="/log-in" class="nav__link" id="sign-up-link">Log In</a></li>
                 </ul>
             </nav>
         </div>
@@ -57,10 +56,27 @@
     </section>
 
     <main>
-        <div class="container">
-            <div class="analyze-link">
-                <input id="analyze-input" type="text" class="analyze-link__input" placeholder="Analyze link">
-                <button id="analyze-button" class="analyze-link__button func--button">Analyze</button>
+        <div class="sign-up-container">
+            <div id="sign-up-form" class="sign-up-form">
+                <div class="form">
+                    <h2>Sign Up</h2>
+                    <div class="form-element">
+                        <label for="name">Name</label>
+                        <input type="text" placeholder="Enter full name" id="sign-up-name">
+                    </div>
+                    <div class="form-element">
+                        <label for="email">Email</label>
+                        <input type="email" placeholder="Enter email" id="sign-up-email">
+                    </div>
+                    <div class="form-element">
+                        <label for="password">Password</label>
+                        <input type="password" name="" id="sign-up-password" placeholder="Enter password">
+                    </div>
+                    <div class="form-element">
+                        <button id="sign-up-button" class="link--button">Log In</button>
+                    </div>
+                </div>
+                <span id="sign-up-invalid-message" class="invalid-message"></span>
             </div>
         </div>
     </main>
@@ -71,25 +87,26 @@
         </div>
     </footer>
 
-    <div id="log-in-form" class="popup display-none">
+<!-- 
+    <div id="sign-up-form" class="popup">
         <div class="close-btn">&times;</div>
         <div class="form">
             <h2>Log In</h2>
             <div class="form-element">
                 <label for="email">Email</label>
-                <input type="email" placeholder="Enter email" id="log-in-email">
+                <input type="email" placeholder="Enter email" id="sign-up-email">
             </div>
             <div class="form-element">
                 <label for="password">Password</label>
-                <input type="password" name="" id="log-in-password" placeholder="Enter password">
+                <input type="password" name="" id="sign-up-password" placeholder="Enter password">
             </div>
             <div class="form-element">
-                <button id="log-in-button" class="link--button">Log In</button>
+                <button id="sign-up-button" class="link--button">Log In</button>
             </div>
         </div>
-        <span id="log-in-invalid-message" class="invalid-message"></span>
-    </div>
-
+        <span id="sign-up-invalid-message" class="invalid-message"></span>
+    </div> -->
+<!-- 
     <div id="sign-up-form" class="popup display-none">
         <div class="close-btn">&times;</div>
         <div class="form">
@@ -111,7 +128,7 @@
             </div>
         </div>
         <span id="sign-up-invalid-message" class="invalid-message"></span>
-    </div>
+    </div> -->
 
     <section class="errors display-none">
         <div class="error">

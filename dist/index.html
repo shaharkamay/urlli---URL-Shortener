@@ -42,16 +42,17 @@
                     <li class="nav__item"><a href="/dashboard" class="nav__link">Dashboard</a></li>
                 </ul>
                 <ul class="nav__list nav--secondary row">
-                    <li class="nav__item"><a class="nav__link" id="log-in-link">Log In</a></li>
-                    <li class="nav__item"><button id="sign-up-link" class="nav__link link--button">Sign Up</button></li>
+                    <li class="nav__item"><a href="/log-in" class="nav__link" id="log-in-link">Log In</a></li>
+                    <li class="nav__item"><a href="/sign-up" id="sign-up-link" class="nav__link link--button">Sign Up</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     
     <section class="hello">
-        <div class="container">
+        <div class="container row">
             <span class="hello-user">Hello guest</span>
+            <button class="log-out-button" id="log-out-button">Log Out</button>
         </div>
     </section>
 
@@ -60,7 +61,7 @@
             <h1 class="intro__title">Short links, big results</h1>
             <div class="intro__cta">
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur quia quam at est facilis mollitia ipsum modi aut sunt incidunt.</p>
-                <button id="get-started-button" class="intro__button link--button">Get Started</button>
+                <a href="/sign-up" id="get-started-button" class="intro__button link--button">Get Started</a>
             </div>
         </div>
     </section>
@@ -68,7 +69,8 @@
     <main>
         <div class="container shorten--container">
             <div class="shorten">
-                <input id="shorten-input" type="text" class="shorten__input" placeholder="Shorten your link">
+                <input id="shorten-input" type="text" class="shorten__input shorten__input--long" placeholder="Shorten your link">
+                <input id="custom-input" type="text" class="shorten__input shorten__input--custom" placeholder="Custom alias (optional)">
                 <button id="shorten-button" class="shorten__button func--button">Shorten</button>
             </div>
             <div class="output display-none">

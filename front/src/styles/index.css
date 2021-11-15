@@ -1,0 +1,131 @@
+
+
+/*
+intro section
+*/
+.intro {
+    background-color: var(--clr-primary);
+    padding: var(--padding-block-section) 0;
+}
+.intro__title {
+    font-family: var(--font-title);
+    font-size: 4rem;
+    line-height: 1.1;
+    color: var(--foreground);
+}
+
+.intro__cta {
+    color: var(--foreground);
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.intro__cta > * {
+    margin-top: var(--margin-top-element);
+}
+
+.intro__button {
+    text-transform: uppercase;
+}
+
+
+/*
+main section
+*/
+main {
+    padding: var(--padding-block-section) 0;
+    background-color: var(--clr-secondary);
+}
+
+.shorten--container {
+    text-align: center;
+}
+.shorten--container > * + * {
+    margin-top: 1em;
+}
+
+.shorten {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.shorten__input {
+    padding: 1em;
+    height: 4em;
+    border: none;
+    font-size: inherit;
+    border: 1px solid var(--clr-primary);
+    border-radius: var(--radius);
+}
+.shorten__input::placeholder {
+    font-size: 0.8rem;
+}
+.shorten__input--long {
+    width: 70%;
+}
+.shorten__input--custom {
+    width: 30%;
+}
+
+.output {
+    margin-top: var(--margin-top-element);
+    padding: 1em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.3em;
+    background-color: var(--clr-primary);
+    border-radius: var(--radius);
+}
+.output a:link {
+    color: #8ab4f8;
+}
+.output a:visited {
+    color: #c58af9;
+}
+
+.short-link-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+}
+
+.long-link {
+    text-align: left;
+    width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--foreground);
+}
+
+.short-link {
+    width: 100%;
+}
+
+.copy--button {
+    vertical-align: bottom;
+    height: 2em;
+    padding: 0 2em;
+    cursor: pointer;
+    border: none;
+    background-color: var(--clr-primary);
+    color: var(--foreground);
+    border: 1px solid;
+    border-radius: var(--radius);
+    font-family: var(--font-title);
+    font-size: inherit;
+}
+.copy--button:hover,
+.copy--button:focus {
+    background-color: var(--foreground);
+    color: var(--clr-primary);
+    border: 1px solid var(--foreground);
+}

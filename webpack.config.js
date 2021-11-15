@@ -9,6 +9,8 @@ const config = {
         index: './front/src/scripts/index.js',
         analytics: './front/src/scripts/analytics.js',
         dashboard: './front/src/scripts/dashboard.js',
+        'log-in': './front/src/scripts/log-in.js',
+        'sign-up': './front/src/scripts/sign-up.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -31,6 +33,16 @@ const config = {
             filename: './sub-pages/dashboard.html',
             template: './front/src/sub-pages/dashboard.html',
             chunks: ['dashboard']
+        }),
+        new HtmlWebpackPlugin({
+            filename: './sub-pages/log-in.html',
+            template: './front/src/sub-pages/log-in.html',
+            chunks: ['log-in']
+        }),
+        new HtmlWebpackPlugin({
+            filename: './sub-pages/sign-up.html',
+            template: './front/src/sub-pages/sign-up.html',
+            chunks: ['sign-up']
         }),
     ],
     module: {

@@ -6,10 +6,11 @@ const { redirectorRouter } = require('./routes/redirector.js');
 const { apiRouter } = require('./routes/api.js');
 const { userRouter } = require('./routes/user-router.js');
 const { errorHandler } = require('./error-handling/error-handler.js');
-// const { userHandler } = require('./middleware/user-handler.js'); //not working for some reason...
+const { userHandler } = require('./middleware/user-handler.js'); //not working for some reason...
+require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
@@ -25,6 +26,14 @@ app.get('/analytics', (req, res) => {
 
 app.get('/dashboard', (req, res) => {
     res.sendFile(path.resolve('./dist/sub-pages/dashboard.html'));
+});
+
+app.get('/log-in', (req, res) => {
+    res.sendFile(path.resolve('./dist/sub-pages/log-in.html'));
+});
+
+app.get('/sign-up', (req, res) => {
+    res.sendFile(path.resolve('./dist/sub-pages/sign-up.html'));
 });
     
 app.use('/api', apiRouter)
