@@ -67,20 +67,23 @@
     </section>
 
     <main>
-        <div class="container shorten--container">
-            <div class="shorten">
-                <input id="shorten-input" type="text" class="shorten__input shorten__input--long" placeholder="Shorten your link">
-                <input id="custom-input" type="text" class="shorten__input shorten__input--custom" placeholder="Custom alias (optional)">
-                <button id="shorten-button" class="shorten__button func--button">Shorten</button>
-            </div>
-            <div class="output display-none">
-                <span class="long-link"></span>
-                <span class="short-link-container">
-                    <span class="short-link"><a id="short-link" href="#" target="_blank"></a></span>
-                    <span class="copy">
-                        <button id="copy-button" class="copy--button">copy</button>
+        <div class="container">
+            <h2 class="section__title">Shorten Your Link</h2>
+            <div class="shorten--container">
+                <div class="shorten">
+                    <input id="shorten-input" type="text" class="shorten__input shorten__input--long" placeholder="Shorten your link">
+                    <input id="custom-input" type="text" class="shorten__input shorten__input--custom" placeholder="Custom alias (optional)">
+                    <button id="shorten-button" class="shorten__button func--button">Shorten</button>
+                </div>
+                <div class="output display-none">
+                    <span class="long-link"></span>
+                    <span class="short-link-container">
+                        <span class="short-link"><a id="short-link" href="#" target="_blank"></a></span>
+                        <span class="copy">
+                            <button id="copy-button" class="copy--button">copy</button>
+                        </span>
                     </span>
-                </span>
+                </div>
             </div>
         </div>
     </main>

@@ -3,7 +3,8 @@ import '../styles/dashboard.css';
 import '../styles/overwrites.css';
 import '../images/url-logo.png';
 
-import { starter, dashboardStarter } from '../scripts/services/dom';
+import { starter, dashboardStarter } from '../scripts/services/dom.js';
 
 starter();
+
 dashboardStarter();

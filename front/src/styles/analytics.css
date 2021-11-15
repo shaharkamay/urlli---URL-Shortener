@@ -2,7 +2,7 @@
 main section
 */
 main {
-    padding: var(--padding-block-section) 0;
+    padding: calc(var(--padding-block-section) - 2em) 0 var(--padding-block-section);
     background-color: var(--clr-secondary);
 }
 

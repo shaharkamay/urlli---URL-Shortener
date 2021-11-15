@@ -1,11 +1,15 @@
-const { Database } = require('../database/database.js');
+export { userHandler };
+import session from 'express-session';
 
 // not working for some reasons
 const userHandler = (req, res, next) => {
-    if(req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/log-in');
+    next();
+    // console.log(req.session)
+    // if(req.isAuthenticated()) {
+        // return next();
+        // return next({ status: 404, message: 'son of a bitch' });
+    // }
+    // res.redirect('/log-in');
     // try {
     //     if(req.isAuthenticated()) {
 
@@ -20,5 +24,3 @@ const userHandler = (req, res, next) => {
     // }
 
 }
-
-module.exports = { userHandler };

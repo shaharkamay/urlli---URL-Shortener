@@ -1,13 +1,16 @@
-// export { app };
-const path = require('path');
-const express = require('express');
-const cors = require('cors');
-const { redirectorRouter } = require('./routes/redirector.js');
-const { apiRouter } = require('./routes/api.js');
-const { userRouter } = require('./routes/user-router.js');
-const { errorHandler } = require('./error-handling/error-handler.js');
-const { userHandler } = require('./middleware/user-handler.js'); //not working for some reason...
-require('dotenv').config();
+import path from 'path';
+import express from 'express';
+import cors from 'cors';
+import { redirectorRouter } from './routes/redirector.js';
+import { apiRouter } from './routes/api.js';
+import { userRouter } from './routes/user-router.js';
+import { errorHandler } from './error-handling/error-handler.js';
+import { userHandler } from './middleware/user-handler.js'; //not working for some reason...
+import mongoClient from './database/client.js';
+import dotenv from 'dotenv';
+dotenv.config();
+
+mongoClient.init();
 
 const app = express();
 const port = process.env.PORT;
@@ -24,7 +27,7 @@ app.get('/analytics', (req, res) => {
     res.sendFile(path.resolve('./dist/sub-pages/analytics.html'));
 });
 
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', userHandler, (req, res) => {
     res.sendFile(path.resolve('./dist/sub-pages/dashboard.html'));
 });
 

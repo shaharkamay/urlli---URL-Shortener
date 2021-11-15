@@ -256,6 +256,17 @@ hello section
     opacity: 0.75;
 }
 
+
+/* 
+main
+*/
+.section__title {
+    font-family: var(--font-title);
+    font-size: 2rem;
+    color: var(--foreground);
+}
+
+
 /* 
 footer
 */

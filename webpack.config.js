@@ -1,7 +1,6 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
-
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const config = {
     mode: 'development',
@@ -13,7 +12,7 @@ const config = {
         'sign-up': './front/src/scripts/sign-up.js',
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve('dist'),
         filename: 'scripts/[name].js',
         assetModuleFilename: "images/[name][ext][query]",
         clean: true,
@@ -70,4 +69,4 @@ const config = {
     },
 };
 
-module.exports = config;
+export default config;

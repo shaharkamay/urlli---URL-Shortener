@@ -1,5 +1,5 @@
 export { starter, indexStarter, analyticsStarter, dashboardStarter, logInStarter, signUpStarter, displayMessage };
-import { applyTheme, clickCloseErrorHandler, clickShortenHandler, logOutHandler } from './event-handlers';
+import { applyTheme, clickCloseErrorHandler, clickShortenHandler, logOutHandler } from './event-handlers.js';
 import { shortenUrl, addUser, loginUser, getAnalytics, getUserUrls } from '../network/api.js';
 
 const starter = () => {
@@ -162,21 +162,21 @@ function closePopups() {
 
 function renderAnalytics(analytics) {
     const analyticsDiv = createElement('div', [], ['analytics']);
-    
-        for (const key in analytics.data) {
+        for (const key in analytics) {
             const analyticsTitle = createElement('p', [key], ['analytics__title'])
             let analyticsValue;
-            analyticsValue = createElement('p', [analytics.data[key]], ['analytics__value'])
-            if(key === 'url') analyticsValue = createElement('a', [analytics.data[key]], ['analytics__value'], {href: analytics.data[key]})
-        
+            analyticsValue = createElement('p', [analytics[key]], ['analytics__value'])
+            if(key === 'Url') analyticsValue = createElement('a', [analytics[key]], ['analytics__value'], {href: analytics[key]})
+            console.log(analytics.lastClicked);
+            if(key === 'Last Clicked' && !analytics['Last Clicked']) analyticsValue.textContent = 'Never';
             const analyticsProp = createElement('div', [analyticsTitle, analyticsValue], ['analytics__prop'])
             analyticsDiv.append(analyticsProp);
         }
-        const analyticsTitle = createElement('p', ['Last clicked'], ['analytics__title'])
-        const analyticsValue = createElement('p', [analytics.timestamp], ['analytics__value'])
+        // const analyticsTitle = createElement('p', ['Last clicked'], ['analytics__title'])
+        // const analyticsValue = createElement('p', [analytics.lastClicked], ['analytics__value'])
     
-        const analyticsProp = createElement('div', [analyticsTitle, analyticsValue], ['analytics__prop'])
-        analyticsDiv.append(analyticsProp);
+        // const analyticsProp = createElement('div', [analyticsTitle, analyticsValue], ['analytics__prop'])
+        // analyticsDiv.append(analyticsProp);
         document.querySelector('main .container').append(analyticsDiv);
 }
 
