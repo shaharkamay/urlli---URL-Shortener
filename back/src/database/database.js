@@ -1,5 +1,4 @@
-export { Database };
-import fs from 'fs';
+const fs = require('fs');
 
 
 class Database {
@@ -8,13 +7,13 @@ class Database {
 
     constructor(dir) {
         this.#dir = dir;
-        if(!fs.existsSync(`./src/database/${dir}`)) {
-            fs.mkdirSync(`./src/database/${dir}`);
+        if(!fs.existsSync(`./back/src/database/${dir}`)) {
+            fs.mkdirSync(`./back/src/database/${dir}`);
         }
     }
 
     get(key) {
-        const path = `./src/database/${this.#dir}/${key}.json`;
+        const path = `./back/src/database/${this.#dir}/${key}.json`;
         let content;
         try {
             content = fs.readFileSync(path, 'utf-8');
@@ -32,7 +31,7 @@ class Database {
 
     store(key, data, readOnly = false) {
         const timestamp = new Date().toLocaleString();
-        const path = `./src/database/${this.#dir}/${key}.json`;
+        const path = `./back/src/database/${this.#dir}/${key}.json`;
         const content = JSON.stringify({data, readOnly, timestamp});
         try {
             fs.writeFileSync(path, content);
@@ -45,7 +44,7 @@ class Database {
 
     #updateEntry(key, data, readOnly = false) {
         const timestamp = new Date().toLocaleString();
-        const path = `./src/database/${this.#dir}/${key}.json`;
+        const path = `./back/src/database/${this.#dir}/${key}.json`;
         const content = JSON.stringify({data, readOnly, timestamp});
         try {
             fs.writeFileSync(path, content);
@@ -56,7 +55,7 @@ class Database {
     }
 
     isKeyExists(key) {
-        return fs.existsSync(`./src/database/${this.#dir}/${key}.json`)
+        return fs.existsSync(`./back/src/database/${this.#dir}/${key}.json`)
     }
 
 }
@@ -103,3 +102,6 @@ class ReadOnlyEntry extends Entry {
         throw 'Cannot update read-only entries';
     }
 }
+
+
+module.exports = { Database };

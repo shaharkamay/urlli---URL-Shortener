@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
     <title>URL Shortener</title>
-</head>
+<script defer src="../scripts/log-in.js"></script></head>
 <body>
     <header>
         <div class="container row">
@@ -42,7 +42,6 @@
                     <li class="nav__item"><a href="/dashboard" class="nav__link">Dashboard</a></li>
                 </ul>
                 <ul class="nav__list nav--secondary row">
-                    <li class="nav__item"><a href="/log-in" class="nav__link" id="log-in-link">Log In</a></li>
                     <li class="nav__item"><a href="/sign-up" id="sign-up-link" class="nav__link link--button">Sign Up</a></li>
                 </ul>
             </nav>
@@ -56,31 +55,24 @@
         </div>
     </section>
 
-    <section class="intro">
-        <div class="container row-large flex-end">
-            <h1 class="intro__title">Short links, big results</h1>
-            <div class="intro__cta">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur quia quam at est facilis mollitia ipsum modi aut sunt incidunt.</p>
-                <a href="/sign-up" id="get-started-button" class="intro__button link--button">Get Started</a>
-            </div>
-        </div>
-    </section>
-
     <main>
-        <div class="container shorten--container">
-            <div class="shorten">
-                <input id="shorten-input" type="text" class="shorten__input shorten__input--long" placeholder="Shorten your link">
-                <input id="custom-input" type="text" class="shorten__input shorten__input--custom" placeholder="Custom alias (optional)">
-                <button id="shorten-button" class="shorten__button func--button">Shorten</button>
-            </div>
-            <div class="output display-none">
-                <span class="long-link"></span>
-                <span class="short-link-container">
-                    <span class="short-link"><a id="short-link" href="#" target="_blank"></a></span>
-                    <span class="copy">
-                        <button id="copy-button" class="copy--button">copy</button>
-                    </span>
-                </span>
+        <div class="log-in-container">
+            <div id="log-in-form" class="log-in-form">
+                <div class="form">
+                    <h2>Log In</h2>
+                    <div class="form-element">
+                        <label for="email">Email</label>
+                        <input type="email" placeholder="Enter email" id="log-in-email">
+                    </div>
+                    <div class="form-element">
+                        <label for="password">Password</label>
+                        <input type="password" name="" id="log-in-password" placeholder="Enter password">
+                    </div>
+                    <div class="form-element">
+                        <button id="log-in-button" class="link--button">Log In</button>
+                    </div>
+                </div>
+                <span id="log-in-invalid-message" class="invalid-message"></span>
             </div>
         </div>
     </main>
@@ -91,8 +83,8 @@
         </div>
     </footer>
 
-
-    <div id="log-in-form" class="popup display-none">
+<!-- 
+    <div id="log-in-form" class="popup">
         <div class="close-btn">&times;</div>
         <div class="form">
             <h2>Log In</h2>
@@ -109,8 +101,8 @@
             </div>
         </div>
         <span id="log-in-invalid-message" class="invalid-message"></span>
-    </div>
-
+    </div> -->
+<!-- 
     <div id="sign-up-form" class="popup display-none">
         <div class="close-btn">&times;</div>
         <div class="form">
@@ -132,7 +124,7 @@
             </div>
         </div>
         <span id="sign-up-invalid-message" class="invalid-message"></span>
-    </div>
+    </div> -->
 
     <section class="errors display-none">
         <div class="error">

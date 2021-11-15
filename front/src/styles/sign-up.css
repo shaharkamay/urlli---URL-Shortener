@@ -1,0 +1,49 @@
+/*
+main section
+*/
+main {
+    padding: var(--padding-block-section) 0;
+    background-color: var(--clr-primary);
+}
+
+/*  
+sign-up form
+*/
+.sign-up-container {
+    width: 50%;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.sign-up-form {
+    padding: 1em 2em;
+    background-color: var(--background);
+    border-radius: var(--radius);
+}
+
+.sign-up-form .form h2 {
+    text-align: center;
+    color: var(--foreground);
+    font-family: var(--font-title);
+}
+.sign-up-form .form .form-element {
+    margin: var(--margin-top-element) 0;
+}
+.sign-up-form .form .form-element label {
+    color: var(--foreground);
+}
+.sign-up-form .form .form-element input {
+    margin-top: 0.3em;
+    padding: 0.7em;
+    display: block;
+    width: 100%;
+    border: 1px solid var(--clr-primary);
+    border-radius: var(--radius);
+}
+.sign-up-form .form .form-element button {
+    width: 100%;
+}
+.sign-up-form .invalid-message {
+    color: red;
+    font-size: 0.8rem;
+}

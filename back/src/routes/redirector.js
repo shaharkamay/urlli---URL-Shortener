@@ -1,7 +1,7 @@
-export { redirectorRouter };
-import express from 'express';
-import { domain } from '../helpers/constants.js'
-import { Database } from '../database/database.js'
+
+const express = require('express');
+const { domain } = require('../helpers/constants.js');
+const { Database } = require('../database/database.js');
 
 const redirectorRouter = express.Router();
 
@@ -20,3 +20,5 @@ redirectorRouter.get('/:shortUrlId', (req, res, next) => {
         next(error);
     }
 });
+
+module.exports = { redirectorRouter };

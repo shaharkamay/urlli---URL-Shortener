@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/url-logo.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+    <title>Dashboard</title>
+</head>
+<body>
+    <header>
+        <div class="container row">
+            <div class="logo-and-theme">
+                <div class="mobile-nav">
+                    <button class="nav-toggle">
+                        <span class="hamburger"></span>
+                        <span class="hamburger"></span>
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+                <a href="/" class="logo">
+                    <img class="logo-img" src="../images/url-logo.png" alt="">
+                </a>
+                <div class="theme">
+                    <label id="theme-icon" class="theme-icon"></label>
+                    <select class="select-theme" id="select-theme">
+                        <option value="auto">Auto</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
+
+            </div>
+            
+            
+            <nav class="nav row">
+                <ul class="nav__list nav--primary row">
+                    <li class="nav__item"><a href="/" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="/analytics" class="nav__link">Analytics</a></li>
+                    <li class="nav__item"><a href="/dashboard" class="nav__link">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hello">
+        <div class="container row">
+            <span class="hello-user">Hello guest</span>
+            <button class="log-out-button" id="log-out-button">Log Out</button>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <h2 class="links__title">Links made by you</h2>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p class="copyright">© Copyright 2021 Shahar Kamay</p>
+        </div>
+    </footer>
+
+    <section class="errors display-none">
+        <div class="error">
+            <div class="error__header">
+                <strong>URL-Shortener</strong>
+                <button id="error__close">×</button>
+            </div>
+            <div class="error__body">
+                <small class="error__message"></small>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

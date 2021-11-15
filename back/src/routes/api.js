@@ -1,7 +1,6 @@
-export { apiRouter };
-import express from 'express';
-import { Database } from '../database/database.js'
-import { domain } from '../helpers/constants.js'
+const express = require('express');
+const { Database } = require('../database/database.js')
+const { domain } = require('../helpers/constants.js')
 
 const apiRouter = express.Router();
 
@@ -9,8 +8,11 @@ apiRouter.post('/shorten', (req, res, next) => {
     try {
         const url = req.body.url;
         const userEmail = req.body.userEmail;
+        const custom = req.body.custom;
+        console.log(custom);
         const db = new Database('./urls');
-        let shortUrlId = Math.random().toString(36).substr(2, 4);
+        if(db.isKeyExists(custom)) return next({ status: 409, message: 'Custom url id already exists!' });
+        let shortUrlId = custom || Math.random().toString(36).substr(2, 4);
         while(db.isKeyExists(shortUrlId)) shortUrlId = Math.random().toString(36).substr(2, 4);
         const creationDate = new Date().toLocaleString();
         db.store(shortUrlId, { url, shortUrlId, redirectCount: 0, creationDate });
@@ -76,3 +78,6 @@ apiRouter.get('/dashboard/urls', (req, res, next) => {
         next(error)
     }
 })
+
+
+module.exports = { apiRouter };

@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./images/url-logo.png">
+    <link rel="icon" href="../images/url-logo.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
-    <title>URL Shortener</title>
-</head>
+    <title>Analytics</title>
+<script defer src="../scripts/analytics.js"></script></head>
 <body>
     <header>
         <div class="container row">
@@ -21,7 +21,7 @@
                     </button>
                 </div>
                 <a href="/" class="logo">
-                    <img class="logo-img" src="./images/url-logo.png" alt="">
+                    <img class="logo-img" src="../images/url-logo.png" alt="">
                 </a>
                 <div class="theme">
                     <label id="theme-icon" class="theme-icon"></label>
@@ -43,7 +43,7 @@
                 </ul>
                 <ul class="nav__list nav--secondary row">
                     <li class="nav__item"><a href="/log-in" class="nav__link" id="log-in-link">Log In</a></li>
-                    <li class="nav__item"><a href="/sign-up" id="sign-up-link" class="nav__link link--button">Sign Up</a></li>
+                    <li class="nav__item"><a href="sign-up" id="sign-up-link" class="nav__link link--button">Sign Up</a></li>
                 </ul>
             </nav>
         </div>
@@ -56,31 +56,11 @@
         </div>
     </section>
 
-    <section class="intro">
-        <div class="container row-large flex-end">
-            <h1 class="intro__title">Short links, big results</h1>
-            <div class="intro__cta">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur quia quam at est facilis mollitia ipsum modi aut sunt incidunt.</p>
-                <a href="/sign-up" id="get-started-button" class="intro__button link--button">Get Started</a>
-            </div>
-        </div>
-    </section>
-
     <main>
-        <div class="container shorten--container">
-            <div class="shorten">
-                <input id="shorten-input" type="text" class="shorten__input shorten__input--long" placeholder="Shorten your link">
-                <input id="custom-input" type="text" class="shorten__input shorten__input--custom" placeholder="Custom alias (optional)">
-                <button id="shorten-button" class="shorten__button func--button">Shorten</button>
-            </div>
-            <div class="output display-none">
-                <span class="long-link"></span>
-                <span class="short-link-container">
-                    <span class="short-link"><a id="short-link" href="#" target="_blank"></a></span>
-                    <span class="copy">
-                        <button id="copy-button" class="copy--button">copy</button>
-                    </span>
-                </span>
+        <div class="container">
+            <div class="analyze-link">
+                <input id="analyze-input" type="text" class="analyze-link__input" placeholder="Analyze link">
+                <button id="analyze-button" class="analyze-link__button func--button">Analyze</button>
             </div>
         </div>
     </main>
@@ -90,7 +70,6 @@
             <p class="copyright">© Copyright 2021 Shahar Kamay</p>
         </div>
     </footer>
-
 
     <div id="log-in-form" class="popup display-none">
         <div class="close-btn">&times;</div>
