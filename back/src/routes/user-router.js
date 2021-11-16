@@ -58,6 +58,7 @@ userRouter.delete('/log-out', (req, res, next) => {
     try {
         res.clearCookie("token");
         res.clearCookie("name");
+        res.clearCookie("email");
         res.json("Cookie has been deleted");
         res.end();
     } catch (error) {

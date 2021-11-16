@@ -1,39 +1,42 @@
 export { shortenUrl, addUser, loginUser, getAnalytics, getUserUrls, logOut };
 import { displayMessage } from '../services/dom.js';
 
-const baseURL = 'http://localhost:3000/';
+const baseURL = '/';
 
 async function getData(url, headers) {
-    const response = await axios.get(url, headers).catch((err) => {
-        if(err.response.data) {
-            displayMessage(err.response.data);
+    try {
+        const response = await axios.get(url, headers);
+        return response.data;
+    } catch (error) {
+        if(error.response.data) {
+            displayMessage(error.response.data);
         }
         return null;
-    });
-
-    return response.data;
+    }
 }
 
-async function postData(url, headers) { 
-    const response = await axios.post(url, headers).catch((err) => {
-        if(err.response.data) {
-            displayMessage(err.response.data);
+async function postData(url, headers) {
+    try {
+        const response = await axios.post(url, headers);
+        return response.data;
+    } catch (error) {
+        if(error.response.data) {
+            displayMessage(error.response.data);
         }
         return null;
-    });
-
-    return response.data;
+    }
 }
 
 async function deleteData(url, headers) { 
-    const response = await axios.delete(url, headers).catch((err) => {
+    try {
+        const response = await axios.delete(url, headers);
+        return response.data;
+    } catch (error) {
         if(err.response.data) {
             displayMessage(err.response.data);
         }
         return null;
-    });
-
-    return response.data;
+    }
 }
 
 async function shortenUrl(originUrl, userEmail, custom = null) {
@@ -56,7 +59,6 @@ async function loginUser(email, password) {
         email,
         password
     });
-    // if(user.status) return null;
     return user;
 }
 
