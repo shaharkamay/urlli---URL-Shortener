@@ -1,9 +1,10 @@
 export { starter, indexStarter, analyticsStarter, dashboardStarter, logInStarter, signUpStarter, displayMessage };
 import { applyTheme, clickCloseErrorHandler, clickShortenHandler, logOutHandler } from './event-handlers.js';
-import { shortenUrl, addUser, loginUser, getAnalytics, getUserUrls } from '../network/api.js';
+import { addUser, loginUser, getAnalytics, getUserUrls } from '../network/api.js';
+import { getCookie } from '../helpers/helpers.js';
 
 const starter = () => {
-    const name = sessionStorage.getItem('name');
+    const name = getCookie('name');
     if(name) {
         document.querySelector('.hello-user').textContent = `Hello ${name}`;
     } else {
@@ -44,7 +45,8 @@ const starter = () => {
 }
 
 const indexStarter = async () => {
-    const name = sessionStorage.getItem('name');
+    // const name = sessionStorage.getItem('name');
+    const name = getCookie('name');
     if(name) {
         document.querySelector('.intro').classList.add('display-none');
     }
@@ -68,7 +70,6 @@ const indexStarter = async () => {
 };
 
 const analyticsStarter = () => {
-
     signOptionsConfig();
 
     document.getElementById('analyze-button').addEventListener('click', async () => {
@@ -80,7 +81,7 @@ const analyticsStarter = () => {
 } 
 
 const dashboardStarter = async () => {
-    const userEmail = sessionStorage.getItem('userEmail');
+    const userEmail = getCookie('email');
     if(userEmail) {
         const urls = await getUserUrls(userEmail);
         renderUserUrls(urls);
@@ -91,9 +92,6 @@ const dashboardStarter = async () => {
 }
 
 const logInStarter = async () => {
-    if(sessionStorage.getItem('name')) {
-        window.location = "/";
-    }
     document.getElementById('log-in-button').addEventListener('click', async () => {
         const email = document.getElementById('log-in-email').value;
         const isEmail = validator.isEmail(email);
@@ -110,17 +108,12 @@ const logInStarter = async () => {
 
         const user = await loginUser(email, password);
         if(user) {
-            sessionStorage.setItem('name', user.name);
-            sessionStorage.setItem('userEmail', user.email);
-            window.location.reload();
+            window.location.href = '/';
         }
     })
 }
 
 const signUpStarter = async () => {
-    if(sessionStorage.getItem('name')) {
-        window.location = "/";
-    }
     document.getElementById('sign-up-button').addEventListener('click', async () => {
         const name = document.getElementById('sign-up-name').value;
         let isName = true;
@@ -149,16 +142,11 @@ const signUpStarter = async () => {
 
         const user = await addUser({ name, email, password });
         if(user) {
-            sessionStorage.setItem('name', user.name);
-            sessionStorage.setItem('userEmail', user.email)
-            window.location.reload();
+            window.location.href = '/log-in';
         }
     })
 }
 
-function closePopups() {
-    document.querySelectorAll('.popup').forEach(elem => elem.classList.add('display-none'));
-}
 
 function renderAnalytics(analytics) {
     const analyticsDiv = createElement('div', [], ['analytics']);
@@ -167,16 +155,10 @@ function renderAnalytics(analytics) {
             let analyticsValue;
             analyticsValue = createElement('p', [analytics[key]], ['analytics__value'])
             if(key === 'Url') analyticsValue = createElement('a', [analytics[key]], ['analytics__value'], {href: analytics[key]})
-            console.log(analytics.lastClicked);
             if(key === 'Last Clicked' && !analytics['Last Clicked']) analyticsValue.textContent = 'Never';
             const analyticsProp = createElement('div', [analyticsTitle, analyticsValue], ['analytics__prop'])
             analyticsDiv.append(analyticsProp);
         }
-        // const analyticsTitle = createElement('p', ['Last clicked'], ['analytics__title'])
-        // const analyticsValue = createElement('p', [analytics.lastClicked], ['analytics__value'])
-    
-        // const analyticsProp = createElement('div', [analyticsTitle, analyticsValue], ['analytics__prop'])
-        // analyticsDiv.append(analyticsProp);
         document.querySelector('main .container').append(analyticsDiv);
 }
 
@@ -203,83 +185,10 @@ function createElement(tagName, children = [], classes = [], attributes = {}, ev
 }
 
 function signOptionsConfig() {
-    const name = sessionStorage.getItem('name');
+    const name = getCookie('name');
     if(name) {
         document.querySelector('.nav--secondary').classList.add('display-none');
-    }
-
-    document.getElementById('log-in-link').addEventListener('click', () => {
-        closePopups();
-        document.getElementById('log-in-form').classList.remove('display-none');
-    })
-    document.querySelectorAll('.popup .close-btn').forEach(elem => elem.addEventListener('click', () => {
-        closePopups();
-    }));
-
-    document.getElementById('sign-up-link').addEventListener('click', () => {
-        closePopups();
-        document.getElementById('sign-up-form').classList.remove('display-none');
-    })
-    
-
-
-    document.getElementById('sign-up-button').addEventListener('click', async () => {
-        const name = document.getElementById('sign-up-name').value;
-        let isName = true;
-        name.split(' ').forEach(word => {
-            if(!validator.isAlpha(word)) {
-                isName = false;
-                return;
-            }
-        });
-        if(!isName) {
-            document.getElementById('sign-up-invalid-message').textContent = "invalid name";
-            return;
-        }
-        const email = document.getElementById('sign-up-email').value;
-        const isEmail = validator.isEmail(email);
-        if(!isEmail) {
-            document.getElementById('sign-up-invalid-message').textContent = "invalid email";
-            return;
-        }
-        const password = document.getElementById('sign-up-password').value;
-        const isPassword = validator.isEmpty(password);
-        if(isPassword) {
-            document.getElementById('sign-up-invalid-message').textContent = "invalid password";
-            return;
-        }
-
-        const user = await addUser({ name, email, password });
-        if(user) {
-            sessionStorage.setItem('name', user.name);
-            sessionStorage.setItem('userEmail', user.email)
-            window.location.reload();
-        }
-        closePopups();
-    })
-
-    document.getElementById('log-in-button').addEventListener('click', async () => {
-        const email = document.getElementById('log-in-email').value;
-        const isEmail = validator.isEmail(email);
-        if(!isEmail) {
-            document.getElementById('log-in-invalid-message').textContent = "invalid email";
-            return;
-        }
-        const password = document.getElementById('log-in-password').value;
-        const isPassword = validator.isEmpty(password);
-        if(isPassword) {
-            document.getElementById('log-in-invalid-message').textContent = "invalid password";
-            return;
-        }
-
-        const user = await loginUser(email, password);
-        if(user) {
-            sessionStorage.setItem('name', user.name);
-            sessionStorage.setItem('userEmail', user.email);
-            window.location.reload();
-        }
-        closePopups();
-    })
+    }   
 }
 
 function displayMessage(message) {

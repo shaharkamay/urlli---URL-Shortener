@@ -33,6 +33,8 @@ p - 16px (footer)
     --margin-top-element: 1em;
 
     --radius: 5px;
+
+    font-size: 12px;
 }
 
 *,
@@ -204,6 +206,9 @@ header {
 .nav {
     display: none;
 }
+.nav > * + * {
+    margin-top: var(--margin-top-element);
+}
 .nav--visible {
     display: block;
     margin-top: var(--margin-top-element);
@@ -211,6 +216,9 @@ header {
 
 .nav__list {
     list-style: none;
+}
+.nav__list > * + * {
+    margin-top: var(--margin-top-element);
 }
 /* .nav__item {
     margin-top: 0.5em;
@@ -250,6 +258,7 @@ hello section
     border-radius: var(--radius);
     font-family: var(--font-title);
     text-decoration: none;
+    font-size: inherit;
 }
 .log-out-button:hover,
 .log-out-button:focus {
@@ -327,6 +336,7 @@ Screens 700px+
 @media (min-width: 700pX) {
     :root {
         --padding-block-section: 5rem;
+        font-size: 14px;
     }
     .logo-and-theme {
         width: 30%;
@@ -343,6 +353,12 @@ Screens 700px+
     }
     .nav__list {
         margin: 0;
+    }
+    .nav > * + * {
+        margin-top: 0;
+    }
+    .nav__list > * + * {
+        margin-top: 0;
     }
     .row {
         display: flex;
@@ -365,6 +381,7 @@ Screens 1000px+
 @media (min-width: 1000px) {
     :root {
         --padding-block-section: 8rem;
+        font-size: 16px;
     }
     .row-large {
         display: flex;

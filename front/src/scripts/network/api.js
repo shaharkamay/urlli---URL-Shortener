@@ -1,4 +1,4 @@
-export { shortenUrl, addUser, loginUser, getAnalytics, getUserUrls };
+export { shortenUrl, addUser, loginUser, getAnalytics, getUserUrls, logOut };
 import { displayMessage } from '../services/dom.js';
 
 const baseURL = 'http://localhost:3000/';
@@ -25,6 +25,17 @@ async function postData(url, headers) {
     return response.data;
 }
 
+async function deleteData(url, headers) { 
+    const response = await axios.delete(url, headers).catch((err) => {
+        if(err.response.data) {
+            displayMessage(err.response.data);
+        }
+        return null;
+    });
+
+    return response.data;
+}
+
 async function shortenUrl(originUrl, userEmail, custom = null) {
     const shortUrl = await postData(`${baseURL}api/shorten`, { url: originUrl, userEmail, custom });
     return shortUrl;
@@ -33,6 +44,11 @@ async function shortenUrl(originUrl, userEmail, custom = null) {
 async function addUser(user) {
     const userName = await postData(`${baseURL}user/sign-up`, user);
     return userName;
+}
+
+async function logOut() {
+    const data = await deleteData(`${baseURL}user/log-out`);
+    return data;
 }
 
 async function loginUser(email, password) {

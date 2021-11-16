@@ -1,5 +1,6 @@
 export { applyTheme, clickCloseErrorHandler, clickShortenHandler, logOutHandler };
-import { shortenUrl } from '../network/api.js';
+import { getCookie } from '../helpers/helpers.js';
+import { shortenUrl, logOut } from '../network/api.js';
 
 function applyTheme(theme) {
     document.body.classList.remove("theme-auto", "theme-light", "theme-dark");
@@ -15,7 +16,7 @@ function clickCloseErrorHandler(e) {
 
 async function clickShortenHandler(e) {
     const url = document.getElementById('shorten-input').value.trim();
-    const userEmail = sessionStorage.getItem('userEmail');
+    const userEmail = getCookie('email');
     const custom = document.getElementById('custom-input').value || null;
     const shortUrl = await shortenUrl(url, userEmail, custom);
     document.querySelector('.output').classList.remove('display-none');
@@ -25,8 +26,7 @@ async function clickShortenHandler(e) {
     shortLinkElem.textContent = shortUrl;
 }
 
-function logOutHandler(e) {
-    sessionStorage.removeItem('name');
-    sessionStorage.removeItem('userEmail');
-    window.location.href = '/';
+async function logOutHandler(e) {
+    const data = await logOut();
+    window.location.href = '/log-in';
 }

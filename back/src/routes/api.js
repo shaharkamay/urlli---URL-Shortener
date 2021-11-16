@@ -13,8 +13,6 @@ apiRouter.post('/shorten', async (req, res, next) => {
         const url = req.body.url;
         const userEmail = req.body.userEmail;
         const custom = req.body.custom;
-        console.log(custom);
-        console.log(await isKeyExists('shortUrlId', custom, Url));
         if(await isKeyExists('shortUrlId', custom, Url)) return next({ status: 409, message: 'Custom url id already exists!' });
         let shortUrlId = custom || Math.random().toString(36).substr(2, 4);
         while(await isKeyExists('shortUrlId', shortUrlId, Url)) shortUrlId = Math.random().toString(36).substr(2, 4);
@@ -26,10 +24,8 @@ apiRouter.post('/shorten', async (req, res, next) => {
         }
         if(userEmail) {
             if(await isKeyExists('email', userEmail, User)) {
-                const userData = await User.findOne({ email: userEmail });
-                const shortUrlIds = userData.shortUrlIds ? userData.shortUrlIds : [];
-                shortUrlIds.push(shortUrlId);
-                await User.updateOne({ email: userEmail }, { shortUrlIds })
+                const isUpdated = (await User.updateOne({ email: userEmail }, { $push: { shortUrlIds: shortUrlId } })).matchedCount ? true : false;
+                if(isUpdated) return next({ status: 502, message: 'Could not set short link to user!' });
             } else {
                 next({ status: 401, message: 'Unauthorized email' })
             }
