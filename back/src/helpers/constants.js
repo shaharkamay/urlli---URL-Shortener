@@ -1,2 +1,2 @@
 export { domain };
-const domain = 'http://localhost:3000/';
+const domain = 'https://urlli.herokuapp.com/';

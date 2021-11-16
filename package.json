@@ -5,6 +5,7 @@
   "main": "webpack.config.js",
   "type": "module",
   "scripts": {
+    "start": "node ./back/src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./back/src/server.js --ext js",
     "build": "webpack build"
