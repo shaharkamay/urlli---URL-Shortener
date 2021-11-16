@@ -25,7 +25,7 @@ apiRouter.post('/shorten', async (req, res, next) => {
         if(userEmail) {
             if(await isKeyExists('email', userEmail, User)) {
                 const isUpdated = (await User.updateOne({ email: userEmail }, { $push: { shortUrlIds: shortUrlId } })).matchedCount ? true : false;
-                if(isUpdated) return next({ status: 502, message: 'Could not set short link to user!' });
+                if(!isUpdated) return next({ status: 502, message: 'Could not set short link to user!' });
             } else {
                 next({ status: 401, message: 'Unauthorized email' })
             }
@@ -42,12 +42,13 @@ apiRouter.get('/analytics/:shortUrlId', async (req, res, next) => {
         const shortUrlId = req.params.shortUrlId;
         if(await isKeyExists('shortUrlId', shortUrlId, Url)) {
             const url = await Url.findOne({ shortUrlId });
+            const lastClicked = url.lastClicked ? url.lastClicked.toLocaleString() : 'Never';
             res.json({ 
                 'Url': url.url,
                 'Short Url Id': url.shortUrlId,  
                 'Redirect Count': url.redirectCount,
                 'Creation Date': url.creationDate.toLocaleString(),
-                'Last Clicked': url.lastClicked.toLocaleString(),
+                'Last Clicked': lastClicked,
             });
             res.end();
         } else next({ status: 404, message: 'Url short key not found' });

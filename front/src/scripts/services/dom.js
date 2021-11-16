@@ -1,7 +1,7 @@
 export { starter, indexStarter, analyticsStarter, dashboardStarter, logInStarter, signUpStarter, displayMessage };
 import { applyTheme, clickCloseErrorHandler, clickShortenHandler, logOutHandler } from './event-handlers.js';
 import { addUser, loginUser, getAnalytics, getUserUrls } from '../network/api.js';
-import { getCookie } from '../helpers/helpers.js';
+import { getCookie, removeChildren } from '../helpers/helpers.js';
 
 const starter = () => {
     const name = getCookie('name');
@@ -76,6 +76,7 @@ const analyticsStarter = () => {
         const link = document.getElementById('analyze-input').value;
         const shortUrlId = link.substr(link.lastIndexOf('/') + 1);
         const analytics = await getAnalytics(shortUrlId);
+        console.log(analytics)
         renderAnalytics(analytics);
     })
 } 
@@ -155,11 +156,12 @@ function renderAnalytics(analytics) {
             let analyticsValue;
             analyticsValue = createElement('p', [analytics[key]], ['analytics__value'])
             if(key === 'Url') analyticsValue = createElement('a', [analytics[key]], ['analytics__value'], {href: analytics[key]})
-            if(key === 'Last Clicked' && !analytics['Last Clicked']) analyticsValue.textContent = 'Never';
             const analyticsProp = createElement('div', [analyticsTitle, analyticsValue], ['analytics__prop'])
             analyticsDiv.append(analyticsProp);
         }
-        document.querySelector('main .container').append(analyticsDiv);
+        const analyticsRoot = document.getElementById('analytics-root');
+        removeChildren(analyticsRoot);
+        analyticsRoot.append(analyticsDiv);
 }
 
 function renderUserUrls(urls) { //[ { shortUrl, longUrl } ]
