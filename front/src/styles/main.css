@@ -75,6 +75,7 @@ body.theme-dark {
     --theme-icon: "🌛︎";
 
     --inverted: invert(1) hue-rotate(180deg);
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -289,6 +290,14 @@ footer {
     vertical-align: bottom;
 }
 
+.github-img {
+    width: 1.5em;
+    vertical-align: bottom;
+    filter: var(--inverted);
+}
+.github-img:hover {
+    opacity: .75;
+}
 
 /* 
 Erros
