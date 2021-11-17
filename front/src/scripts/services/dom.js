@@ -1,7 +1,7 @@
-export { starter, indexStarter, analyticsStarter, dashboardStarter, logInStarter, signUpStarter, displayMessage };
+export { starter, indexStarter, analyticsStarter, dashboardStarter, logInStarter, signUpStarter, displayMessage, createElement };
 import { applyTheme, clickCloseErrorHandler, clickShortenHandler, logOutHandler } from './event-handlers.js';
 import { addUser, loginUser, getAnalytics, getUserUrls } from '../network/api.js';
-import { getCookie, removeChildren } from '../helpers/helpers.js';
+import { getCookie, removeChildren, removeLoader, showLoader } from '../helpers/helpers.js';
 
 const starter = () => {
     const name = getCookie('name');
@@ -73,19 +73,24 @@ const analyticsStarter = () => {
     signOptionsConfig();
 
     document.getElementById('analyze-button').addEventListener('click', async () => {
+        const analyticsRoot = document.getElementById('analytics-root');
+        showLoader(analyticsRoot);
         const link = document.getElementById('analyze-input').value;
         const shortUrlId = link.substr(link.lastIndexOf('/') + 1);
         const analytics = await getAnalytics(shortUrlId);
         console.log(analytics)
         renderAnalytics(analytics);
+        removeLoader();
     })
 } 
 
 const dashboardStarter = async () => {
     const userEmail = getCookie('email');
     if(userEmail) {
+        showLoader(document.getElementById('links-root'));
         const urls = await getUserUrls(userEmail);
         renderUserUrls(urls);
+        removeLoader();
     } else {
         alert('Log in first!')
         window.location.href = '/log-in';
@@ -106,8 +111,9 @@ const logInStarter = async () => {
             document.getElementById('log-in-invalid-message').textContent = "invalid password";
             return;
         }
-
+        showLoader(document.getElementById('log-in-form'));
         const user = await loginUser(email, password);
+        removeLoader();
         if(user) {
             window.location.href = '/';
         }
@@ -141,7 +147,9 @@ const signUpStarter = async () => {
             return;
         }
 
+        showLoader(document.getElementById('sign-up-form'));
         const user = await addUser({ name, email, password });
+        removeLoader();
         if(user) {
             window.location.href = '/log-in';
         }
@@ -174,7 +182,7 @@ function renderUserUrls(urls) { //[ { shortUrl, longUrl } ]
             const linksProp = createElement('div', [urlShort, urlLong], ['links__prop'])
             links.append(linksProp);
         }
-        document.querySelector('main .container').append(links);
+        document.getElementById('links-root').append(links);
 }
 
 function createElement(tagName, children = [], classes = [], attributes = {}, eventListeners = {}) {

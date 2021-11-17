@@ -1,5 +1,5 @@
 export { applyTheme, clickCloseErrorHandler, clickShortenHandler, logOutHandler };
-import { getCookie } from '../helpers/helpers.js';
+import { getCookie, removeLoader, showLoader } from '../helpers/helpers.js';
 import { shortenUrl, logOut } from '../network/api.js';
 
 function applyTheme(theme) {
@@ -15,6 +15,7 @@ function clickCloseErrorHandler(e) {
 }
 
 async function clickShortenHandler(e) {
+    showLoader(document.querySelector('.shorten--container'));
     const url = document.getElementById('shorten-input').value.trim();
     const userEmail = getCookie('email');
     const custom = document.getElementById('custom-input').value || null;
@@ -24,6 +25,7 @@ async function clickShortenHandler(e) {
     const shortLinkElem = document.getElementById('short-link');
     shortLinkElem.href = shortUrl;
     shortLinkElem.textContent = shortUrl;
+    removeLoader();
 }
 
 async function logOutHandler(e) {
