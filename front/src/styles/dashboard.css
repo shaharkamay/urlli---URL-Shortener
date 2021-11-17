@@ -21,10 +21,10 @@ Links
     border-radius: var(--radius);
 }
 .links a:link {
-    color: #8ab4f8;
+    color: var(--link-clr);
 }
 .links a:visited {
-    color: #c58af9;
+    color: var(--visited-clr);
 }
 .links__title {
     font-family: var(--font-title);

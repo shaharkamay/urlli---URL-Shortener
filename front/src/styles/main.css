@@ -34,6 +34,9 @@ p - 16px (footer)
 
     --radius: 5px;
 
+    --link-clr: #0000EE;
+    --visited-clr: #551A8B;
+
     font-size: 12px;
 }
 
@@ -75,6 +78,9 @@ body.theme-dark {
     --theme-icon: "🌛︎";
 
     --inverted: invert(1) hue-rotate(180deg);
+
+    --link-clr: #8ab4f8;
+    --visited-clr: #c58af9;
 
 }
 

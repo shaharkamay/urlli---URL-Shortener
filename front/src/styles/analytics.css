@@ -21,10 +21,10 @@ Analytics
     border-radius: var(--radius);
 }
 .analytics a:link {
-    color: #8ab4f8;
+    color: var(--link-clr);
 }
 .analytics a:visited {
-    color: #c58af9;
+    color: var(--visited-clr);
 }
 .analytics__prop {
     display: flex;
