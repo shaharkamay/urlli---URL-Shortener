@@ -1,4 +1,5 @@
 export { apiRouter };
+import validator from 'validator';
 import express from 'express';
 import { isKeyExists, storeData } from '../database/database.js';
 import mongoose from 'mongoose';
@@ -13,6 +14,7 @@ apiRouter.post('/shorten', async (req, res, next) => {
         const url = req.body.url;
         const userEmail = req.body.userEmail;
         const custom = req.body.custom;
+        if(!validator.isURL(url, { require_protocol: true, require_host: true })) return next({ status: 400, message: 'Invalid URL!' })
         if(await isKeyExists('shortUrlId', custom, Url)) return next({ status: 409, message: 'Custom url id already exists!' });
         let shortUrlId = custom || Math.random().toString(36).substr(2, 4);
         while(await isKeyExists('shortUrlId', shortUrlId, Url)) shortUrlId = Math.random().toString(36).substr(2, 4);

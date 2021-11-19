@@ -1,6 +1,7 @@
 export { applyTheme, clickCloseErrorHandler, clickShortenHandler, logOutHandler };
 import { getCookie, removeLoader, showLoader } from '../helpers/helpers.js';
 import { shortenUrl, logOut } from '../network/api.js';
+import { displayMessage } from './dom.js';
 
 function applyTheme(theme) {
     document.body.classList.remove("theme-auto", "theme-light", "theme-dark");
@@ -17,6 +18,11 @@ function clickCloseErrorHandler(e) {
 async function clickShortenHandler(e) {
     showLoader(document.querySelector('.shorten--container'));
     const url = document.getElementById('shorten-input').value.trim();
+    console.log(validator.isURL(url))
+    if(!validator.isURL(url, { require_protocol: true, require_host: true })) {
+        displayMessage('Invalid URL!');
+        return;
+    }
     const userEmail = getCookie('email');
     const custom = document.getElementById('custom-input').value || null;
     const shortUrl = await shortenUrl(url, userEmail, custom);
