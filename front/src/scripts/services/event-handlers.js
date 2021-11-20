@@ -21,10 +21,16 @@ async function clickShortenHandler(e) {
     console.log(validator.isURL(url))
     if(!validator.isURL(url, { require_protocol: true, require_host: true })) {
         displayMessage('Invalid URL!');
+        removeLoader();
         return;
     }
     const userEmail = getCookie('email');
     const custom = document.getElementById('custom-input').value || null;
+    if(custom && !validator.isAlphanumeric(custom)) {
+        displayMessage('Custom alias must contain only letters and numbers!');
+        removeLoader();
+        return;
+    }
     const shortUrl = await shortenUrl(url, userEmail, custom);
     document.querySelector('.output').classList.remove('display-none');
     document.querySelector('.long-link').textContent = url;

@@ -17,6 +17,7 @@ apiRouter.post('/shorten', async (req, res, next) => {
         if(!validator.isURL(url, { require_protocol: true, require_host: true })) return next({ status: 400, message: 'Invalid URL!' })
         if(await isKeyExists('shortUrlId', custom, Url)) return next({ status: 409, message: 'Custom url id already exists!' });
         let shortUrlId = custom || Math.random().toString(36).substr(2, 4);
+        if(!validator.isAlphanumeric(custom)) return next({ status: 400, message: 'Custom alias must contain only letters and numbers!' });
         while(await isKeyExists('shortUrlId', shortUrlId, Url)) shortUrlId = Math.random().toString(36).substr(2, 4);
         const creationDate = new Date();
         try {

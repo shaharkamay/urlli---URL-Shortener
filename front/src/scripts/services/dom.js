@@ -75,7 +75,12 @@ const analyticsStarter = () => {
     document.getElementById('analyze-button').addEventListener('click', async () => {
         const analyticsRoot = document.getElementById('analytics-root');
         showLoader(analyticsRoot);
-        const link = document.getElementById('analyze-input').value;
+        const link = document.getElementById('analyze-input').value.trim();
+        if(!link) {
+            displayMessage('Invalit input!');
+            removeLoader();
+            return;
+        }
         const shortUrlId = link.substr(link.lastIndexOf('/') + 1);
         const analytics = await getAnalytics(shortUrlId);
         console.log(analytics)
